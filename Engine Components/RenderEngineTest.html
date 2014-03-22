@@ -6,7 +6,6 @@
 
 		<script>
 		<!--
-		//window.onload = function()
 		function init()
 		{
 			var canvasElement = document.getElementById("my_canvas");
@@ -20,20 +19,25 @@
 			
 			var images = ["b1", "b2"];
 			animRend = new AnimRenderer(images, 1);
-			animRend.x = 100;
-			animRend.y = 100;
+			animRend.x = 200;
+			animRend.y = 200;
 			renderPool.addObject(animRend);
 			
+			animRend2 = new AnimRenderer(images, 2);
+			animRend2.x = 220;
+			animRend2.y = 200;
+			renderPool.addObject(animRend2);
 			
 			animRend.startAnimation();
-			//renderPool.render();
-			setTimeout(render, 1000/60);
+			animRend2.startAnimation();
+			
+			render();
 		}
 		
 		function render()
 		{
 			renderPool.render();
-			setTimeout(render, 1000/60);
+			setTimeout(render, 1000/60); //60FPS
 		}
 		-->
 		</script>
