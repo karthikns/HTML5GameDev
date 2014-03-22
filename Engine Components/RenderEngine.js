@@ -7,10 +7,15 @@ imageRepository = new function ImageRepository()
 		console.log("Image loaded: " + key);
 	}
 
-	var key = "ship";
-	this.images[key] = new Image();
-	this.images[key].onload = function() { imageLoadCallback(key) };
-	this.images[key].src = "imgs/ship.png";
+	this.pair = new Object();
+	this.pair["ship"] = "imgs/ship.png";
+	
+	for(key in this.pair)
+	{
+		this.images[key] = new Image();
+		this.images[key].onload = function() { imageLoadCallback(key) };
+		this.images[key].src = this.pair[key];
+	}
 
 	this.getImage = function(imageName)
 	{
@@ -35,8 +40,7 @@ renderPool = new function RenderPool()
 		this.pool[this.pool.length] = obj;
 	}
 
-	//TODO: Test this function
-	function removeObject(obj)
+	this.removeObject = function(obj)
 	{
 		var index;
 		for(index = 0; index < this.pool.length; ++index)
