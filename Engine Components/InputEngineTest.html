@@ -5,26 +5,50 @@
 		<script src="InputEngine.js"> </script>
 		<script>
 		<!--
-		function foo(event) { alert("key down"); }
+		function checkKey()
+		{
+			console.log('timeout');
+			window.setTimeout(checkKey, 10);
+			
+			var div = document.getElementById('display');
+			
+			var str = '';
+			
+			if(gInputEngine.actions['move-up'])
+			{
+				str += 'UP, ';
+			}
+			
+			if(gInputEngine.actions['move-down'])
+			{
+				str += 'DOWN, ';
+			}
 
+			if(gInputEngine.actions['move-left'])
+			{
+				str += 'LEFT, ';
+			}
+
+			if(gInputEngine.actions['move-right'])
+			{
+				str += 'RIGHT, ';
+			}
+
+			div.innerHTML = str;
+		}
+		
 		window.onload = function init()
 		{
-			var canvas = document.getElementById("my_canvas");
-			canvas.addEventListener('keydown', foo, false );
+			gInputEngine.setup();
+			gInputEngine.bind(87, 'move-up');
+			gInputEngine.bind(65, 'move-left');
+			gInputEngine.bind(83, 'move-down');
+			gInputEngine.bind(68, 'move-right');
+
+			my_div = document.getElementById('display');
+			window.setTimeout(checkKey, 1000);
 			
-/*			document.addEventListener('keydown', function(event)
-			{
-				//if(lastDownTarget == canvas)
-				//{
-					alert('keydown');
-				//}
-			}, false);
-*/
-			/*			
-			gInputEngine.setup(document.getElementById("my_canvas"));
-			alert("Hello World");
-			console.log("Hello World");
-*/
+			
 		}
 		-->
 		</script>

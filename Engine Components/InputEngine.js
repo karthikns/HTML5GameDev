@@ -4,47 +4,42 @@ PointClass = function()
 
 PointClass.prototype.x = 0;
 PointClass.prototype.y = 0;
-// PointClass.prototype.bindings = new Object();
+PointClass.prototype.bindings = new Object();
 
 function InputEngineClass()
 {
-	this.bindings = new Object();
 }
 
 InputEngineClass.prototype.mouse = new PointClass();
+InputEngineClass.prototype.bindings = new Object();
+InputEngineClass.prototype.actions = new Object();
 
-InputEngineClass.prototype.setup = function(element)
+InputEngineClass.prototype.setup = function()
 {
-	this.bind(87, 'move-up');
-	this.bind(65, 'move-left');
-	this.bind(83, 'move-down');
-	this.bind(68, 'move-right');
-	
-	// element.addEventListener('keydown', this.onKeyDown);
-	element.addEventListener('keydown', function(event) { alert("key down"); } );
-	element.addEventListener('keyup', this.onKeyUp);
+	document.addEventListener('keydown', this.onKeyDown );
+	document.addEventListener('keyup', this.onKeyUp);
 }
 
 InputEngineClass.prototype.onKeyUp = function(event) 
 {
-	var action = this.bindings[event.keyID];
+	var action = gInputEngine.bindings[event.keyCode];
 
 	if (action)
 	{
-		this.actions[action] = false;
+		gInputEngine.actions[action] = false;
+		console.log("Key Up: " + action);
 	}
 }
 
 InputEngineClass.prototype.onKeyDown = function(event)
 {
-	var action = this.bindings[event.keyID];
+	var action = gInputEngine.bindings[event.keyCode];
 
 	if (action)
 	{
-		this.actions[action] = true;
+		gInputEngine.actions[action] = true;
+		console.log("Key Down: " + action);
 	}
-	
-	console.log("Key Down");
 }
 
 InputEngineClass.prototype.bind = function(key, action)
