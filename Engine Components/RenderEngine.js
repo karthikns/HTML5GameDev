@@ -150,6 +150,50 @@ AnimRenderer.prototype.render = function(context)
 	context.drawImage(image, this.x, this.y);
 }
 
+// TODO: Test this
 function AnimManager()
 {
+}
+
+AnimManager.prototype.x = 0;
+AnimManager.prototype.y = 0;
+
+AnimManager.prototype.currentAnim = null;
+AnimManager.prototype.animations = new Object();
+
+AnimManager.prototype.addAnimation = function(animName, imageNames, frameRate)
+{
+	this.animations[animName] = new AnimRenderer(imageNames, frameRate);
+}
+
+AnimManager.prototype.playAnimation = function(animName)
+{
+	if(typeof this.animations[animName] === "undefined")
+	{
+		return;
+	}
+	
+	this.currentAnim = animName;
+	this.animations[this.currentAnim].startAnimation();
+}
+
+AnimManager.prototype.stopAnimation = function()
+{
+	this.currentAnim = null;
+}
+
+AnimManager.prototype.updateFrameRate = function(animName, frameRate)
+{
+}
+
+AnimManager.prototype.render = function(context)
+{
+	if(this.currentAnim == null || typeof this.animations[this.currentAnim] === "undefined")
+	{
+		return;
+	}
+
+	this.animations[this.currentAnim].x = this.x;
+	this.animations[this.currentAnim].y = this.y;
+	this.animations[this.currentAnim].render(context);
 }
