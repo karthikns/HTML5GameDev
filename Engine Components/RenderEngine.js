@@ -1,40 +1,66 @@
-renderPool = function RenderPool(context)
+imageRepository = new function ImageRepository()
 {
-	this.context = context;
-}
-
-RenderPool.prototype.canvas = null;
-RenderPool.prototype.pool = new Array();
-
-RenderPool.prototype.addObject = function(obj)
-{
-	this.pool[size] = obj;
-}
-
-RenderPool.prototype.removeObject = function(obj)
-{
-	var index;
-	for(index = 0; index < this.pool.length; ++index)
+	this.images = new Object();
+	
+	function imageLoadCallback()
 	{
-		if(this.pool[index] === obj)
+		console.log("Image loaded: " + key);
+	}
+
+	var key = "ship";
+	this.images[key] = new Image();
+	this.images[key].onload = function() { imageLoadCallback(key) };
+	this.images[key].src = "imgs/ship.png";
+
+	this.getImage = function(imageName)
+	{
+		if(this.images[imageName])
 		{
-			break;
+			return this.images[imageName];
+		}
+		else
+		{
+			return null;
 		}
 	}
-	
-	// Found!
-	if(index != this.pool.length)
-	{
-		this.pool.splice(index, 1);
-	}
 }
 
-RenderPool.prototype.render()
+renderPool = new function RenderPool()
 {
-	for(index = 0; index < this.pool.length; ++index)
+	this.context = null;
+	this.pool = new Array();
+	
+	this.addObject = function(obj)
 	{
-		this.pool[index].render(this.context);
-	}	
+		this.pool[this.pool.length] = obj;
+	}
+
+	//TODO: Test this function
+	function removeObject(obj)
+	{
+		var index;
+		for(index = 0; index < this.pool.length; ++index)
+		{
+			if(this.pool[index] === obj)
+			{
+				break;
+			}
+		}
+		
+		// Found!
+		if(index != this.pool.length)
+		{
+			this.pool.splice(index, 1);
+		}
+	}
+
+	this.render = function()
+	{
+		for(index = 0; index < this.pool.length; ++index)
+		{
+			this.pool[index].render(this.context);
+		}	
+	}
 }
 
 function ImageRenderer(imageName)
@@ -42,13 +68,18 @@ function ImageRenderer(imageName)
 	this.x = 0;
 	this.y = 0;
 	this.image = imageRepository.getImage(imageName);
-
-	this.render = function(context)
-	{
-		context.drawImage(this.image, this.x, this.y);
-	}
 }
 
+ImageRenderer.prototype.x = 0;
+ImageRenderer.prototype.y = 0;
+ImageRenderer.prototype.image = null;
+
+ImageRenderer.prototype.render = function(context)
+{
+	context.drawImage(this.image, this.x, this.y);
+}
+
+//TODO: Test AnnimRenderer
 function AnimRenderer(imageNames, frameRate)
 {
 	this.x = 0;

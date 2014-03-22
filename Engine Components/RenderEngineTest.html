@@ -2,14 +2,29 @@
 <html>
 	<head>
 		<title> Input Engine Test </title>
-		<script src="InputEngine.js"> </script>
+		<script src="RenderEngine.js"> </script>
 
 		<script>
+		<!--
+		window.onload = function()
+		{
+			var canvasElement = document.getElementById("my_canvas");
+			var canvasContext = canvasElement.getContext('2d');
+			renderPool.context = canvasContext;
 			
+			imageRend = new ImageRenderer("ship");
+			imageRend.x = 50;
+			imageRend.y = 50;
+
+			renderPool.context = canvasContext;
+			renderPool.addObject(imageRend);
+			renderPool.render();
+		}
+		-->
 		</script>
 	</head>
 	<body>
-		<canvas id="my_canvas" width="200" height="200" style="border:1px solid #FF0000;"> </canvas>
+		<canvas id="my_canvas" width="500" height="500" style="border:1px solid #FF0000;"> </canvas>
 		<div id="display"> </div>
 	</body>
 </html>
