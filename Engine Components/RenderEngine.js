@@ -2,18 +2,30 @@ imageRepository = new function ImageRepository()
 {
 	this.images = new Object();
 	
-	function imageLoadCallback()
-	{
-		console.log("Image loaded: " + key);
-	}
-
 	this.pair = new Object();
 	this.pair["ship"] = "imgs/ship.png";
+	this.pair["b2"] = "imgs/bullet_enemy.png";
+	this.pair["b1"] = "imgs/bullet.png";
 	
-	for(key in this.pair)
+	console.log(Object.keys(this.pair).length);
+
+	var imagesLoaded = 0;
+	var numberOfImages = Object.keys(this.pair).length;
+	
+	function imageLoadCallback()
+	{
+		++imagesLoaded;
+
+		if(imagesLoaded === numberOfImages)
+		{
+			init();
+		}
+	}
+
+	for(var key in this.pair)
 	{
 		this.images[key] = new Image();
-		this.images[key].onload = function() { imageLoadCallback(key) };
+		this.images[key].onload = function() { imageLoadCallback() };
 		this.images[key].src = this.pair[key];
 	}
 
@@ -83,7 +95,6 @@ ImageRenderer.prototype.render = function(context)
 	context.drawImage(this.image, this.x, this.y);
 }
 
-//TODO: Test AnnimRenderer
 function AnimRenderer(imageNames, frameRate)
 {
 	this.x = 0;
@@ -94,37 +105,39 @@ function AnimRenderer(imageNames, frameRate)
 	this.isAnimStarted = false;
 	
 	this.lastStartTime = 0; // milliseconds
-	this.frameDuration =  1000 / frameRate; // milliseconds
-	this.totalAnimTime = imageNames.length * frameDuration; // milliseconds
-	
-	for(var index = 0; index < imageName.length; ++index)
+	this.frameDuration =  Math.floor(1000 / frameRate); // milliseconds
+	this.totalAnimTime = imageNames.length * this.frameDuration; // milliseconds
+
+	for(var index = 0; index < imageNames.length; ++index)
 	{
-		images[index] = imageRepository.getImage(imageNames[index]);
+		this.images[index] = imageRepository.getImage(imageNames[index]);
 	}
 
 	this.startAnimation = function()
 	{
-		this.lastStartTime = getTime(); // TODO: Find function
+		var date = new Date();
+		this.lastStartTime = date.getTime();
 		this.isAnimStarted = true;
 	}
-	
+
 	this.stopAnimation = function()
 	{
 		this.isAnimStarted = false;
 	}
-	
+
 	this.render = function(context)
 	{
 		var image = this.images[0];
 	
-		if(isAnimStarted == true)
+		if(this.isAnimStarted == true)
 		{
-			var currentTime = getTime(); // TODO: Find function
+			var date = new Date();
+			var currentTime = date.getTime();
 			
-			var frame = (currentTime - lastStartTime) % totalAnimTime;
-			this.lastStartTime = lastStartTime + (currentTime - lastStartTime) / totalAnimTime;
+			this.lastStartTime = this.lastStartTime + Math.floor((currentTime - this.lastStartTime) / this.totalAnimTime) * this.totalAnimTime;
+			var currentFrame = Math.floor( (currentTime - this.lastStartTime) / this.frameDuration );
 			
-			image = this.images[frame];
+			image = this.images[currentFrame];
 		}
 
 		context.drawImage(image, this.x, this.y);

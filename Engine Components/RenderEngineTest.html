@@ -6,7 +6,8 @@
 
 		<script>
 		<!--
-		window.onload = function()
+		//window.onload = function()
+		function init()
 		{
 			var canvasElement = document.getElementById("my_canvas");
 			var canvasContext = canvasElement.getContext('2d');
@@ -15,12 +16,24 @@
 			imageRend = new ImageRenderer("ship");
 			imageRend.x = 50;
 			imageRend.y = 50;
-
-			renderPool.context = canvasContext;
 			renderPool.addObject(imageRend);
 			
-			renderPool.removeObject(imageRend);
+			var images = ["b1", "b2"];
+			animRend = new AnimRenderer(images, 1);
+			animRend.x = 100;
+			animRend.y = 100;
+			renderPool.addObject(animRend);
+			
+			
+			animRend.startAnimation();
+			//renderPool.render();
+			setTimeout(render, 1000/60);
+		}
+		
+		function render()
+		{
 			renderPool.render();
+			setTimeout(render, 1000/60);
 		}
 		-->
 		</script>
