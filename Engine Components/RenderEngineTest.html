@@ -23,13 +23,21 @@
 			animRend.y = 200;
 			renderPool.addObject(animRend);
 			
-			animRend2 = new AnimRenderer(images, 2);
+			animRend2 = new AnimRenderer(images, 2.5);
 			animRend2.x = 220;
 			animRend2.y = 200;
 			renderPool.addObject(animRend2);
 			
+			var images = ["d0", "d1", "d2", "d3", "d4", "d5", "d6", "d7"];
+			
+			deepBall = new AnimRenderer(images, 10);
+			deepBall.x = 50;
+			deepBall.y = 200;
+			renderPool.addObject(deepBall);
+			
 			animRend.startAnimation();
 			animRend2.startAnimation();
+			deepBall.startAnimation();
 			
 			render();
 		}
