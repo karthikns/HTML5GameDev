@@ -6,6 +6,14 @@ imageRepository = new function ImageRepository()
 	this.pair["ship"] = "imgs/ship.png";
 	this.pair["b2"] = "imgs/bullet_enemy.png";
 	this.pair["b1"] = "imgs/bullet.png";
+	this.pair["d0"] = "imgs/db_00.png";
+	this.pair["d1"] = "imgs/db_01.png";
+	this.pair["d2"] = "imgs/db_02.png";
+	this.pair["d3"] = "imgs/db_03.png";
+	this.pair["d4"] = "imgs/db_04.png";
+	this.pair["d5"] = "imgs/db_05.png";
+	this.pair["d6"] = "imgs/db_06.png";
+	this.pair["d7"] = "imgs/db_07.png";
 	
 	console.log(Object.keys(this.pair).length);
 
