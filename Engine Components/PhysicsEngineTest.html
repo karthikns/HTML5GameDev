@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>game app</title>
+		
+		<script>
+			window.onload = function() {
+				//setup();
+				init();
+			}
+			
+			var b2Vec2;
+			var b2AABB;
+			var b2BodyDef;
+			var b2Body;
+			var b2FixtureDef;
+			var b2Fixture;
+			var b2World;
+			var b2PolygonShape;
+			var b2DebugDraw;
+			var b2ContactListener;
+
+			//var world;
+			var ctx;
+			var scale = 30;
+			var flag = 0;
+			
+			function box(param) {			
+				this.id = param.id;
+				this.x = param.x;
+				this.y = param.y;
+				this.halfWidth = param.halfWidth;
+				this.halfHeight = param.halfHeight;
+				this.useBouncyFixture = param.useBouncyFixture;
+				this.type = param.type;
+				this.info = { 
+					'density' : 10 ,
+					'friction' : 1.0 ,
+					'restitution' : 0.5 ,
+					'linearDamping' : 0.0 ,
+					'angularDamping' : 0.0 ,
+					'type' : b2Body.b2_dynamicBody ,
+				}; 				
+				this.userData = this;				
+			}
+			
+			function init() {
+				
+				canvas = document.getElementById("main");
+				ctx = canvas.getContext("2d");
+				
+				canvas.style.border = "red 1px solid";
+				
+				gPhysicsEngine.create();
+			
+				var param = new Object();
+				param.id = "one";
+				param.type = "dynamic";
+				param.x = 20/scale;
+				param.y = 200/scale;
+				param.halfWidth = 20/scale;
+				param.halfHeight = 20/scale;    
+				param.w = 20/scale;
+				param.h = 20/scale;
+				param.useBouncyFixture = true;
+				var box1 = new box(param);
+				box1.body = gPhysicsEngine.addBody(box1);
+				box1.body.ApplyImpulse(
+						new b2Vec2(10,0),
+						box1.body.GetWorldCenter()
+					);
+				
+				param.id = "two";
+				param.type = "dynamic";
+				param.x = 500/scale;
+				param.y = 200/scale;
+				param.w = 10/scale;
+				param.h = 10/scale;
+				param.halfWidth = 10/scale;
+				param.halfHeight = 10/scale; 
+				param.useBouncyFixture = true;
+				var box2 = new box(param);
+				box2.body = gPhysicsEngine.addBody(box2);
+				box2.body.ApplyImpulse(
+						new b2Vec2(-10,0),
+						box2.body.GetWorldCenter()
+					);
+				
+				window.setInterval(gPhysicsEngine.update, 1000/60);
+				
+			}
+		</script>
+		
+		<script src="physicsEngine.js"></script>
+		<script src="Box2dWeb-2.1.a.3.js"></script>
+	</head>
+	<body>
+				
+		<canvas id="main" width="600" height="360"> </canvas>
+	
+	
+	</body>
+</html>
