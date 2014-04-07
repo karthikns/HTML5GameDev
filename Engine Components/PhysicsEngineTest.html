@@ -70,6 +70,7 @@
 						new b2Vec2(10,0),
 						box1.body.GetWorldCenter()
 					);
+                //box1.body.ApplyForce(new b2Vec2(10,0), box1.body.GetWorldCenter());
 				
 				param.id = "two";
 				param.type = "dynamic";
@@ -86,6 +87,7 @@
 						new b2Vec2(-10,0),
 						box2.body.GetWorldCenter()
 					);
+                //box2.body.ApplyForce(new b2Vec2(-10,0), box2.body.GetWorldCenter());
 				
 				window.setInterval(gPhysicsEngine.update, 1000/60);
 				
