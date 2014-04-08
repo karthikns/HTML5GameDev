@@ -63,7 +63,7 @@ PhysicsEngine.prototype.draw_world = function() {
 
 PhysicsEngine.prototype.update = function () {
 	//var start = Date.now();        
-	gPhysicsEngine.world.Step(this.PHYSICS_LOOP_HZ, 8, 3);	
+	gPhysicsEngine.world.Step(gPhysicsEngine.PHYSICS_LOOP_HZ, 8, 3);
 	gPhysicsEngine.world.ClearForces();
 	gPhysicsEngine.draw_world();
 	//return(Date.now() - start);
