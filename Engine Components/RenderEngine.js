@@ -103,6 +103,53 @@ ImageRenderer.prototype.render = function(context)
 	context.drawImage(this.image, this.x, this.y);
 }
 
+function ImageRendererScroll(imageName, frameRate)
+{
+	this.x = 0;
+	this.y = 0;
+	this._image = imageRepository.getImage(imageName);	
+	this._frameDuration =  Math.floor(1000 / frameRate); // milliseconds
+}
+
+ImageRendererScroll.prototype.x = 0;
+ImageRendererScroll.prototype.y = 0;
+ImageRendererScroll.prototype._image = null;
+ImageRendererScroll.prototype._frameDuration = 0;
+ImageRendererScroll.prototype._currentY = 0;
+ImageRendererScroll.prototype._lastStartTime = 0; 	// milliseconds
+ImageRendererScroll.prototype._isScrolling = false; 	// milliseconds
+
+ImageRendererScroll.prototype.startScroll = function()
+{
+	var date = new Date();
+	this._lastStartTime = date.getTime();
+	this._isScrolling = true;
+}
+
+ImageRendererScroll.prototype.stopScroll = function()
+{
+	this._isScrolling = false;
+}
+
+ImageRendererScroll.prototype.render = function(context)
+{
+	// TODO: NOT WORKING
+	while(this._isScrolling == true)
+	{
+		context.drawImage(this._image, this.x, this.y);
+		context.drawImage(this._image, this.x, this.y - this._image.height);
+
+		var date = new Date();
+		var currentTime = date.getTime();
+
+		var cyclesElapsed = Math.floor((currentTime - this._lastStartTime) / this._frameDuration);
+		this._lastStartTime = this.lastStartTime +  cyclesElapsed * this._frameDuration;
+//		var currentFrame = Math.floor( (currentTime - this.lastStartTime) / this.frameDuration );
+
+//		this._currentY = (this._currentY + 1) % this._image.height;
+	}
+}
+
 function AnimRenderer(imageNames, frameRate)
 {
 	this.images = new Array(imageNames.length);
