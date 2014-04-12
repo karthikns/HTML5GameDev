@@ -88,6 +88,7 @@ PlayerShip.prototype = new Ship();
 
 PlayerShip.prototype.setLeftKey = function(keyCode)
 {
+    gInputEngine.bind(keyCode, this.moveLeft);
 }
 
 PlayerShip.prototype.setRightKey = function(keyCode)
@@ -115,7 +116,7 @@ function Bullet(imageId, velocity)
     user_data.fill_color = 'rgba(2,100,0,0.3)';
     user_data.border_color = '#555';
     //------------------------------
-    this.physicsBody = gPhysicsEngine.addBody("bullet", "dynamic", 20/scale, 50/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate);
+    this.physicsBody = gPhysicsEngine.addBody("bullet", "dynamic", 100/scale, 50/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate);
     this.setMoveVelocity(velocity.x, velocity.y);
 }
 

@@ -26,7 +26,7 @@ InputEngineClass.prototype.onKeyUp = function(event)
 
 	if (action)
 	{
-		gInputEngine.actions[action] = false;
+		gInputEngine.actions[event.keyCode]();
 		console.log("Key Up: " + action);
 	}
 }
@@ -37,14 +37,15 @@ InputEngineClass.prototype.onKeyDown = function(event)
 
 	if (action)
 	{
-		gInputEngine.actions[action] = true;
+		gInputEngine.actions[event.keyCode]();
 		console.log("Key Down: " + action);
 	}
 }
 
 InputEngineClass.prototype.bind = function(key, action)
 {
-	this.bindings[key] = action;
+	this.bindings[key] = true;
+    this.actions[key] = action;
 }
 
 gInputEngine = new InputEngineClass();
