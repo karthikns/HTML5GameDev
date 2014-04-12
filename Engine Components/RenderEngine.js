@@ -1,40 +1,61 @@
 imageRepository = new function ImageRepository()
 {
 	this.images = new Object();
-	
-	this.pair = new Object();
-	this.pair["ship"] = "imgs/ship.png";
-	this.pair["b2"] = "imgs/bullet_enemy.png";
-	this.pair["b1"] = "imgs/bullet.png";
-	this.pair["d0"] = "imgs/db_00.png";
-	this.pair["d1"] = "imgs/db_01.png";
-	this.pair["d2"] = "imgs/db_02.png";
-	this.pair["d3"] = "imgs/db_03.png";
-	this.pair["d4"] = "imgs/db_04.png";
-	this.pair["d5"] = "imgs/db_05.png";
-	this.pair["d6"] = "imgs/db_06.png";
-	this.pair["d7"] = "imgs/db_07.png";
-	
-	console.log(Object.keys(this.pair).length);
 
-	var imagesLoaded = 0;
-	var numberOfImages = Object.keys(this.pair).length;
-	
-	function imageLoadCallback()
+	this.initialize = function(configFile)
 	{
-		++imagesLoaded;
+		var xmlHttpRequest = new XMLHttpRequest();
 
-		if(imagesLoaded === numberOfImages)
+		xmlHttpRequest.onreadystatechange = function()
 		{
-			init();
+			if(xmlHttpRequest.readyState == 4) // Ready
+			{
+				if(xmlHttpRequest.status == 200) // OK
+				{
+					try
+					{
+						var renderConfig = JSON.parse(xmlHttpRequest.responseText);
+						loadImages(renderConfig);
+					}
+					catch(e)
+					{
+						alert("Error in render configuration JSON");
+					}
+				}
+				else
+				{
+					alert("There was a problem retrieving the render configuration data: " + req.statusText);
+				}
+			}
 		}
-	}
 
-	for(var key in this.pair)
-	{
-		this.images[key] = new Image();
-		this.images[key].onload = function() { imageLoadCallback() };
-		this.images[key].src = this.pair[key];
+		xmlHttpRequest.open("GET", configFile, false);
+		xmlHttpRequest.send();
+
+		function loadImages(renderConfig)
+		{
+			console.log(Object.keys(renderConfig).length);
+
+			var imagesLoaded = 0;
+			var numberOfImages = Object.keys(renderConfig).length;
+			
+			function imageLoadCallback()
+			{
+				++imagesLoaded;
+
+				if(imagesLoaded === numberOfImages)
+				{
+					init();
+				}
+			}
+
+			for(var key in renderConfig)
+			{
+				imageRepository.images[key] = new Image();
+				imageRepository.images[key].onload = function() { imageLoadCallback() };
+				imageRepository.images[key].src = renderConfig[key];
+			}
+		}
 	}
 
 	this.getImage = function(imageName)
