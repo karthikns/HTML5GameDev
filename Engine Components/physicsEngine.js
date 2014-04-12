@@ -149,5 +149,9 @@ PhysicsEngine.prototype.addBody = function (id, type, x, y, w, h, userData, user
 PhysicsEngine.prototype.removeBody = function (obj) {
 	gPhysicsEngine.world.DestroyBody(obj);
 }
+
+PhysicsEngine.prototype.setMoveVelocity = function (pBody, velocity) {
+    pBody.ApplyImpulse( new b2Vec2(velocity.x,velocity.y),  pBody.GetWorldCenter() );
+}
 	
 var gPhysicsEngine = new PhysicsEngine();
