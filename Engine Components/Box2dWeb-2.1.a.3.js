@@ -4942,6 +4942,10 @@ Box2D.postDefs = [];
       if (bd.active) {
          this.m_flags |= b2Body.e_activeFlag;
       }
+       //-------added by Aakarsh---------
+       this.userObject = bd.userObject;
+       this.userFunction = bd.userFunction;
+       //------------------------------
       this.m_world = world;
       this.m_xf.position.SetV(bd.position);
       this.m_xf.R.Set(bd.angle);
@@ -4997,6 +5001,9 @@ Box2D.postDefs = [];
       f; f = f.m_next) {
          f.Synchronize(broadPhase, xf1, this.m_xf);
       }
+       //--------Added by Aakarsh-------------
+       this.userFunction(this.userObject, this);
+       //-------------------------------------
    }
    b2Body.prototype.SynchronizeTransform = function () {
       this.m_xf.R.Set(this.m_sweep.a);

@@ -74,41 +74,73 @@ PhysicsEngine.prototype.registerBody = function (bodyDef) {
 	return body;
 }
 
-PhysicsEngine.prototype.addBody = function (entityDef) {
-	var bodyDef = new b2BodyDef();
+//PhysicsEngine.prototype.addBody = function (entityDef) {
+//	var bodyDef = new b2BodyDef();
+//
+//	var id = entityDef.id;
+//
+//	if(entityDef.type == 'static') {
+//		bodyDef.type = b2Body.b2_staticBody;
+//	} else {
+//		bodyDef.type = b2Body.b2_dynamicBody;
+//	}
+//
+//    bodyDef.userData = entityDef.userData;
+//
+//	bodyDef.position.x = entityDef.x;
+//	bodyDef.position.y = entityDef.y;
+//	bodyDef.linearDamping = entityDef.info.linearDamping;
+//	bodyDef.angularDamping = entityDef.info.angularDamping;
+//
+//	var body = this.registerBody(bodyDef);
+//	var fixtureDefinition = new b2FixtureDef();
+//
+//	if(entityDef.useBouncyFixture) {
+//		fixtureDefinition.density = entityDef.info.density;
+//		fixtureDefinition.friction = entityDef.info.friction;
+//		fixtureDefinition.restitution = entityDef.info.restitution;
+//
+//	}
+//
+//	// Now we define the shape of this object as a box
+//	fixtureDefinition.shape = new b2PolygonShape();
+//	fixtureDefinition.shape.SetAsBox(entityDef.halfWidth, entityDef.halfHeight);
+//	body.CreateFixture(fixtureDefinition);
+//
+//	return body;
+//}
 
-	var id = entityDef.id;
+PhysicsEngine.prototype.addBody = function (id, type, x, y, w, h, userData, userObject, userFunc) {
+    var bodyDef = new b2BodyDef();
 
-	if(entityDef.type == 'static') {
+    bodyDef.userObject = userObject;
+    bodyDef.userFunction = userFunc;
+	if(type == 'static') {
 		bodyDef.type = b2Body.b2_staticBody;
 	} else {
 		bodyDef.type = b2Body.b2_dynamicBody;
 	}
 
-	var user_data = new Object();
-    user_data.fill_color = 'rgba(2,100,0,0.3)';
-    user_data.border_color = '#555';
-    
-    bodyDef.userData = user_data;
-    
-	bodyDef.position.x = entityDef.x;
-	bodyDef.position.y = entityDef.y;
-	bodyDef.linearDamping = entityDef.info.linearDamping;
-	bodyDef.angularDamping = entityDef.info.angularDamping;
-	
+    bodyDef.userData = userData;
+
+	bodyDef.position.x = x;
+	bodyDef.position.y = y;
+	bodyDef.linearDamping = 0.0;
+	bodyDef.angularDamping = 0.0;
+
 	var body = this.registerBody(bodyDef);
 	var fixtureDefinition = new b2FixtureDef();
 
-	if(entityDef.useBouncyFixture) {
-		fixtureDefinition.density = entityDef.info.density;
-		fixtureDefinition.friction = entityDef.info.friction;
-		fixtureDefinition.restitution = entityDef.info.restitution;
-		
-	}
+	//if(entityDef.useBouncyFixture) {
+		fixtureDefinition.density = 10;
+		fixtureDefinition.friction = 1.0;
+		fixtureDefinition.restitution = 0.5;
+
+	//}
 
 	// Now we define the shape of this object as a box
 	fixtureDefinition.shape = new b2PolygonShape();
-	fixtureDefinition.shape.SetAsBox(entityDef.halfWidth, entityDef.halfHeight);
+	fixtureDefinition.shape.SetAsBox(w/2, h/2);
 	body.CreateFixture(fixtureDefinition);
 
 	return body;

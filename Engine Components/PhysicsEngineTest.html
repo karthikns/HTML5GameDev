@@ -41,8 +41,11 @@
 					'linearDamping' : 0.0 ,
 					'angularDamping' : 0.0 ,
 					'type' : b2Body.b2_dynamicBody ,
-				}; 				
-				this.userData = this;				
+				};
+                var user_data = new Object();
+                user_data.fill_color = 'rgba(2,100,0,0.3)';
+                user_data.border_color = '#555';
+				this.userData = user_data;
 			}
 			
 			function init() {
@@ -54,40 +57,41 @@
 				
 				gPhysicsEngine.create();
 			
-				var param = new Object();
-				param.id = "one";
-				param.type = "dynamic";
-				param.x = 20/scale;
-				param.y = 200/scale;
-				param.halfWidth = 20/scale;
-				param.halfHeight = 20/scale;    
-				param.w = 20/scale;
-				param.h = 20/scale;
-				param.useBouncyFixture = true;
-				var box1 = new box(param);
-				box1.body = gPhysicsEngine.addBody(box1);
-				box1.body.ApplyImpulse(
-						new b2Vec2(10,0),
-						box1.body.GetWorldCenter()
-					);
-                //box1.body.ApplyForce(new b2Vec2(10,0), box1.body.GetWorldCenter());
-				
-				param.id = "two";
-				param.type = "dynamic";
-				param.x = 500/scale;
-				param.y = 200/scale;
-				param.w = 10/scale;
-				param.h = 10/scale;
-				param.halfWidth = 10/scale;
-				param.halfHeight = 10/scale; 
-				param.useBouncyFixture = true;
-				var box2 = new box(param);
-				box2.body = gPhysicsEngine.addBody(box2);
-				box2.body.ApplyImpulse(
-						new b2Vec2(-10,0),
-						box2.body.GetWorldCenter()
-					);
+//				var param = new Object();
+//				param.id = "one";
+//				param.type = "dynamic";
+//				param.x = 20/scale;
+//				param.y = 200/scale;
+//				param.halfWidth = 20/scale;
+//				param.halfHeight = 20/scale;
+//				param.w = 20/scale;
+//				param.h = 20/scale;
+//				param.useBouncyFixture = true;
+//				var box1 = new box(param);
+//				box1.body = gPhysicsEngine.addBody(box1);
+//				box1.body.ApplyImpulse(
+//						new b2Vec2(10,0),
+//						box1.body.GetWorldCenter()
+//					);
+//                //box1.body.ApplyForce(new b2Vec2(10,0), box1.body.GetWorldCenter());
+//
+//				param.id = "two";
+//				param.type = "dynamic";
+//				param.x = 500/scale;
+//				param.y = 200/scale;
+//				param.w = 10/scale;
+//				param.h = 10/scale;
+//				param.halfWidth = 10/scale;
+//				param.halfHeight = 10/scale;
+//				param.useBouncyFixture = true;
+//				var box2 = new box(param);
+//				box2.body = gPhysicsEngine.addBody(box2);
+//				box2.body.ApplyImpulse(
+//						new b2Vec2(-10,0),
+//						box2.body.GetWorldCenter()
+//					);
                 //box2.body.ApplyForce(new b2Vec2(-10,0), box2.body.GetWorldCenter());
+                gameObjectTest.init();
 				
 				window.setInterval(gPhysicsEngine.update, 1000/60);
 				
@@ -96,6 +100,7 @@
 		
 		<script src="physicsEngine.js"></script>
 		<script src="Box2dWeb-2.1.a.3.js"></script>
+        <script src="GameObjectTest.js"></script>
 	</head>
 	<body>
 				
