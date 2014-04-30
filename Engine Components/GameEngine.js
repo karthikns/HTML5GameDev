@@ -1,3 +1,20 @@
+function GameEngine()
+{
+}
+
+GameEngine.prototype.initialize = function(masterAssetFile, callback)
+{
+    gInputEngine.setup();
+    gPhysicsEngine.create();
+    imageRepository.initialize("configuration/renderConfig.json", callback);
+}
+
+GameEngine.prototype.beginGame = function()
+{
+    renderPool.render();
+    setTimeout(render, 1000/60); //60FPS
+}
+
 function GameObject(x, y, width, height)
 {	
 	this._x = x;
