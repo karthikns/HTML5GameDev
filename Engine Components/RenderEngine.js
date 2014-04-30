@@ -1,5 +1,8 @@
 imageRepository = new function ImageRepository()
 {
+
+	
+
 	this.images = new Object();
 	
 	this.pair = new Object();
@@ -20,10 +23,11 @@ imageRepository = new function ImageRepository()
 	var imagesLoaded = 0;
 	var numberOfImages = Object.keys(this.pair).length;
 	
+
 	function imageLoadCallback()
 	{
 		++imagesLoaded;
-
+		console.log("imgcallback");
 		if(imagesLoaded === numberOfImages)
 		{
 			init();
