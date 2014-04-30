@@ -95,6 +95,11 @@ Ship.prototype.setMoveVelocity = function(velocity)
     this._velocity = velocity;
 }
 
+Ship.prototype.setZeroVelocity = function()
+{
+    gPhysicsEngine.setMoveVelocity(this.physicsBody, {x:0, y:0});
+}
+
 Ship.prototype.moveLeft = function()
 {
     gPhysicsEngine.setMoveVelocity(this.physicsBody, {x: -this._velocity, y:0} );
