@@ -32,8 +32,8 @@ GameObject.prototype.physicsUpdate = function(gameObject, physicsObject)
     console.log(outputString);
 
     //update game object x & y
-    gameObject.x = physicsObject.m_xf.position.x;
-    gameObject.y = physicsObject.m_xf.position.y;
+    gameObject._x = physicsObject.m_xf.position.x;
+    gameObject._y = physicsObject.m_xf.position.y;
     if(gameObject.imageRender !== undefined) {
         gameObject.imageRender.x = physicsObject.m_xf.position.x;
         gameObject.imageRender.y = physicsObject.m_xf.position.y;
