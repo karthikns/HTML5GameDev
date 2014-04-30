@@ -20,6 +20,7 @@ GameEngine.prototype.beginGame = function()
 {
     renderPool.render();
     setTimeout(render, 1000/60); //60FPS
+    window.setInterval(gPhysicsEngine.update, 1000/60);
 }
 
 gGameEngine = new GameEngine();
@@ -86,7 +87,7 @@ Ship.prototype.setImage = function(imageId)
 
 Ship.prototype.initialize = function()
 {
-    this.imageRender = new ImageRenderer(this._imageId);
+    this.imageRenderer = new ImageRenderer(this._imageId);
     renderPool.addObject(this.imageRenderer);
 
     //-----Debug data---------------
