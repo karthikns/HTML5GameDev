@@ -12,6 +12,9 @@
 		function setup()
 		{
 			gGameEngine.initialize("configuration/renderConfig.json", init);
+
+			var canvasElement = document.getElementById("my_canvas");
+			gGameEngine.setCanvas(canvasElement);
 		}
 
 		function init()

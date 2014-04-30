@@ -9,6 +9,13 @@ GameEngine.prototype.initialize = function(masterAssetFile, callback)
     imageRepository.initialize(masterAssetFile, callback);
 }
 
+GameEngine.prototype.setCanvas = function(canvasElement)
+{
+    var canvasContext = canvasElement.getContext('2d');
+    renderPool.context = canvasContext;
+    renderPool.canvas = canvasElement;
+}
+
 GameEngine.prototype.beginGame = function()
 {
     renderPool.render();
