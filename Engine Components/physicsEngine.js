@@ -151,7 +151,8 @@ PhysicsEngine.prototype.removeBody = function (obj) {
 }
 
 PhysicsEngine.prototype.setMoveVelocity = function (pBody, velocity) {
-    pBody.ApplyImpulse( new b2Vec2(velocity.x,velocity.y),  pBody.GetWorldCenter() );
+    pBody.SetLinearVelocity(new b2Vec2(velocity.x,velocity.y));
+    //pBody.ApplyImpulse( new b2Vec2(velocity.x,velocity.y),  pBody.GetWorldCenter() );
 }
 	
 var gPhysicsEngine = new PhysicsEngine();

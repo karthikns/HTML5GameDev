@@ -15,7 +15,6 @@ var imageRepository = new function()
 	this.bullet = new Image();
 	this.enemy = new Image();
 	this.enemyBullet = new Image();
-	this.audio = new Audio();
 
 	var imagesLoaded = 0;
 	var totalImages = 3;
@@ -26,7 +25,6 @@ var imageRepository = new function()
 		
 		if(imagesLoaded == 3)
 		{
-			console.log("init load");
 			window.init();
 		}
 	}
@@ -338,7 +336,6 @@ function Game()
 			this.background = new Background();
 			this.background.init(0, 0);
 
-			
 			Ship.prototype.context = this.shipContext;
 			Ship.prototype.canvasWidth = this.shipCanvas.width;
 			Ship.prototype.canvasHeight = this.shipCanvas.height;

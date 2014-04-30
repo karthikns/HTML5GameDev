@@ -1,44 +1,61 @@
 imageRepository = new function ImageRepository()
 {
-
-	
-
 	this.images = new Object();
-	
-	this.pair = new Object();
-	this.pair["ship"] = "imgs/ship.png";
-	this.pair["b2"] = "imgs/bullet_enemy.png";
-	this.pair["b1"] = "imgs/bullet.png";
-	this.pair["d0"] = "imgs/db_00.png";
-	this.pair["d1"] = "imgs/db_01.png";
-	this.pair["d2"] = "imgs/db_02.png";
-	this.pair["d3"] = "imgs/db_03.png";
-	this.pair["d4"] = "imgs/db_04.png";
-	this.pair["d5"] = "imgs/db_05.png";
-	this.pair["d6"] = "imgs/db_06.png";
-	this.pair["d7"] = "imgs/db_07.png";
-	
-	console.log(Object.keys(this.pair).length);
 
-	var imagesLoaded = 0;
-	var numberOfImages = Object.keys(this.pair).length;
-	
-
-	function imageLoadCallback()
+	this.initialize = function(configFile, callback)
 	{
-		++imagesLoaded;
-		console.log("imgcallback");
-		if(imagesLoaded === numberOfImages)
+		var xmlHttpRequest = new XMLHttpRequest();
+
+		xmlHttpRequest.onreadystatechange = function()
 		{
-			init();
+			if(xmlHttpRequest.readyState == 4) // Ready
+			{
+				if(xmlHttpRequest.status == 200) // OK
+				{
+					try
+					{
+						var renderConfig = JSON.parse(xmlHttpRequest.responseText);
+						loadImages(renderConfig);
+					}
+					catch(e)
+					{
+						alert("Error in render configuration JSON");
+					}
+				}
+				else
+				{
+					alert("There was a problem retrieving the render configuration data: " + req.statusText);
+				}
+			}
 		}
-	}
 
-	for(var key in this.pair)
-	{
-		this.images[key] = new Image();
-		this.images[key].onload = function() { imageLoadCallback() };
-		this.images[key].src = this.pair[key];
+		xmlHttpRequest.open("GET", configFile, false);
+		xmlHttpRequest.send();
+
+		function loadImages(renderConfig)
+		{
+			console.log(Object.keys(renderConfig).length);
+
+			var imagesLoaded = 0;
+			var numberOfImages = Object.keys(renderConfig).length;
+			
+			function imageLoadCallback()
+			{
+				++imagesLoaded;
+
+				if(imagesLoaded === numberOfImages)
+				{
+					callback();
+				}
+			}
+
+			for(var key in renderConfig)
+			{
+				imageRepository.images[key] = new Image();
+				imageRepository.images[key].onload = function() { imageLoadCallback() };
+				imageRepository.images[key].src = renderConfig[key];
+			}
+		}
 	}
 
 	this.getImage = function(imageName)
@@ -57,6 +74,7 @@ imageRepository = new function ImageRepository()
 renderPool = new function RenderPool()
 {
 	this.context = null;
+	this.canvas = null;
 	this.pool = new Array();
 	
 	this.addObject = function(obj)
@@ -84,6 +102,8 @@ renderPool = new function RenderPool()
 
 	this.render = function()
 	{
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
 		for(index = 0; index < this.pool.length; ++index)
 		{
 			this.pool[index].render(this.context);
@@ -119,7 +139,7 @@ ImageRendererScroll.prototype.x = 0;
 ImageRendererScroll.prototype.y = 0;
 ImageRendererScroll.prototype._image = null;
 ImageRendererScroll.prototype._frameDuration = 0;
-ImageRendererScroll.prototype._currentY = 0;
+ImageRendererScroll.prototype._scrollAmount = 0;
 ImageRendererScroll.prototype._lastStartTime = 0; 	// milliseconds
 ImageRendererScroll.prototype._isScrolling = false; 	// milliseconds
 
@@ -128,6 +148,7 @@ ImageRendererScroll.prototype.startScroll = function()
 	var date = new Date();
 	this._lastStartTime = date.getTime();
 	this._isScrolling = true;
+	this._scrollAmount = 0;
 }
 
 ImageRendererScroll.prototype.stopScroll = function()
@@ -138,19 +159,37 @@ ImageRendererScroll.prototype.stopScroll = function()
 ImageRendererScroll.prototype.render = function(context)
 {
 	// TODO: NOT WORKING
-	while(this._isScrolling == true)
+	if(this._isScrolling == true)
 	{
-		context.drawImage(this._image, this.x, this.y);
-		context.drawImage(this._image, this.x, this.y - this._image.height);
+		// context.drawImage(this._image, this.x, this.y + this._scrollAmount);
+		// context.drawImage(this._image, this.x, this.y + this._scrollAmount - this._image.height);
+
+			// 0, 0, this._image.width, this._image.height,
+
+		console.log(this.x + " " + this.y + " " + this._image.width + " " + this._image.height + " " + this._scrollAmount);
+
+		// Bottom Image: ORIGINAL
+		context.drawImage(this._image,
+			0, 0, this._image.width, this._scrollAmount + 1,
+			this.x, this.y + this._scrollAmount, this._image.width, this._scrollAmount + 1);
+
+			// this.x, this.y + this._scrollAmount, this._image.width, this._scrollAmount);
+
+		// Top Image
+		if(this._scrollAmount != 0)
+		{
+			//context.drawImage(this._image, this.x, this.y + this._scrollAmount - this._image.height);
+		}
 
 		var date = new Date();
 		var currentTime = date.getTime();
 
-		var cyclesElapsed = Math.floor((currentTime - this._lastStartTime) / this._frameDuration);
-		this._lastStartTime = this.lastStartTime +  cyclesElapsed * this._frameDuration;
-//		var currentFrame = Math.floor( (currentTime - this.lastStartTime) / this.frameDuration );
-
-//		this._currentY = (this._currentY + 1) % this._image.height;
+		var totalScrollAmount = Math.floor((currentTime - this._lastStartTime) / this._frameDuration);
+		this._scrollAmount = totalScrollAmount % this._image.height;
+	}
+	else
+	{
+		context.drawImage(this._image, this.x, this.y);
 	}
 }
 

@@ -6,31 +6,41 @@
 
 		<script>
 		<!--
+		function setup()
+		{
+			imageRepository.initialize("configuration/renderConfig.json", init);
+		}
+
 		function init()
 		{
 
 			var canvasElement = document.getElementById("my_canvas");
 			var canvasContext = canvasElement.getContext('2d');
 			renderPool.context = canvasContext;
+			renderPool.canvas = canvasElement;
 			
-			imageRend = new ImageRenderer("ship");
+			var imageRend = new ImageRenderer("ship");
 			imageRend.x = 50;
 			imageRend.y = 50;
 			renderPool.addObject(imageRend);
 			
 			var images = ["b1", "b2"];
-			animRend = new AnimRenderer(images, 1);
+			var animRend = new AnimRenderer(images, 1);
 			animRend.x = 200;
 			animRend.y = 200;
 			renderPool.addObject(animRend);
 			
-			animRend2 = new AnimRenderer(images, 2.5);
+			var animRend2 = new AnimRenderer(images, 2.5);
 			animRend2.x = 220;
 			animRend2.y = 200;
 			renderPool.addObject(animRend2);
+
+			var scrollRend = new ImageRendererScroll("ship", 32);
+			scrollRend.x = 500;
+			scrollRend.y = 200;
+			renderPool.addObject(scrollRend);
 			
 			var images = ["d0", "d1", "d2", "d3", "d4", "d5", "d6", "d7"];
-			
 			deepBall = new AnimRenderer(images, 10);
 			deepBall.x = 50;
 			deepBall.y = 200;
@@ -39,7 +49,8 @@
 			animRend.startAnimation();
 			animRend2.startAnimation();
 			deepBall.startAnimation();
-			
+			scrollRend.startScroll();
+
 			render();
 		}
 		
@@ -51,8 +62,8 @@
 		-->
 		</script>
 	</head>
-	<body>
-		<canvas id="my_canvas" width="500" height="500" style="border:1px solid #FF0000;"> </canvas>
+	<body onload="setup()">
+		<canvas id="my_canvas" width="1000" height="500" style="border:1px solid #FF0000;"> </canvas>
 		<div id="display"> </div>
 	</body>
 </html>
