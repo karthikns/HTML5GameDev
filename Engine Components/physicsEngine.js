@@ -1,3 +1,4 @@
+var scale = 10;
 var b2Vec2;
 var b2AABB;
 var b2BodyDef;
@@ -15,6 +16,7 @@ function PhysicsEngine(){
 }
 
 PhysicsEngine.prototype.world = null;
+PhysicsEngine.prototype.ctx = null;
 PhysicsEngine.prototype.PHYSICS_LOOP_HZ = 1.0/60;
 
 PhysicsEngine.prototype.init = function () {
@@ -33,9 +35,11 @@ PhysicsEngine.prototype.init = function () {
 	//parameter1: gravity vector
 	//parameter2: allowing sleep (true) or disallowing sleep (false)
 	this.world = new b2World(new b2Vec2(0,0), true);
-	
+    var canvas = document.getElementById("physics_canvas");
+    this.ctx = canvas.getContext("2d");
+
 	var debugDraw = new b2DebugDraw();
-	debugDraw.SetSprite(ctx);
+	debugDraw.SetSprite(this.ctx);
     debugDraw.SetDrawScale(scale);
     debugDraw.SetFillAlpha(0.5);
     debugDraw.SetLineThickness(1.0);
@@ -48,17 +52,17 @@ PhysicsEngine.prototype.init = function () {
 
 PhysicsEngine.prototype.draw_world = function() {
     //first clear the canvas
-    ctx.clearRect( 0 , 0 , 600, 360 );
+    this.ctx.clearRect( 0 , 0 , 600, 360 );
      
-    ctx.fillStyle = '#FFF4C9';
-    ctx.fillRect(0,0, 600, 360);
+    this.ctx.fillStyle = '#FFF4C9';
+    this.ctx.fillRect(0,0, 600, 360);
          
     //convert the canvas coordinate directions to cartesian
-    ctx.save();
-    ctx.translate(0 , 360);
-    ctx.scale(1 , -1);
+    this.ctx.save();
+    this.ctx.translate(0 , 360);
+    this.ctx.scale(1 , -1);
     gPhysicsEngine.world.DrawDebugData();
-    ctx.restore();
+    this.ctx.restore();
 }
 
 PhysicsEngine.prototype.update = function () {

@@ -27,11 +27,18 @@
 
 			gGameEngine.beginGame();
 		}
+
+        function render()
+        {
+            renderPool.render();
+            setTimeout(render, 1000/60); //60FPS
+        }
 		-->
 		</script>
 	</head>
 	<body onload="setup()">
-		<canvas id="my_canvas" width="1000" height="500" style="border:1px solid #FF0000;"> </canvas>
-		<div id="display"> </div>
+		<canvas id="my_canvas" width="500" height="300" style="border:1px solid #FF0000;"> </canvas>
+
+        <canvas id="physics_canvas" width="500" height="300" style="border:1px solid #FF0000;"> </canvas>
 	</body>
 </html>
