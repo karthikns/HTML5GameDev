@@ -1,4 +1,4 @@
-function GameEngine()
+gGameEngine = new function GameEngine()
 {
 }
 
@@ -6,7 +6,7 @@ GameEngine.prototype.initialize = function(masterAssetFile, callback)
 {
     gInputEngine.setup();
     gPhysicsEngine.create();
-    imageRepository.initialize("configuration/renderConfig.json", callback);
+    imageRepository.initialize(masterAssetFile, callback);
 }
 
 GameEngine.prototype.beginGame = function()
@@ -58,7 +58,7 @@ GameObject.prototype.physicsUpdate = function(gameObject, physicsObject)
 
 }
 
-function Ship(imageId)
+function Ship()
 {
 
 }
