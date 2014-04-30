@@ -88,6 +88,8 @@ Ship.prototype.setImage = function(imageId)
 Ship.prototype.initialize = function()
 {
     this.imageRenderer = new ImageRenderer(this._imageId);
+    this.imageRenderer.x = this._x;
+    this.imageRenderer.y = this._y;
     renderPool.addObject(this.imageRenderer);
 
     //-----Debug data---------------
