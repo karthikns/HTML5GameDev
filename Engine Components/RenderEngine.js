@@ -170,15 +170,18 @@ ImageRendererScroll.prototype.render = function(context)
 
 		// Bottom Image: ORIGINAL
 		context.drawImage(this._image,
-			0, 0, this._image.width, this._scrollAmount + 1,
-			this.x, this.y + this._scrollAmount, this._image.width, this._scrollAmount + 1);
-
-			// this.x, this.y + this._scrollAmount, this._image.width, this._scrollAmount);
+			0, 0, this._image.width, this._image.height - this._scrollAmount,
+			this.x, this.y + this._scrollAmount, this._image.width, this._image.height - this._scrollAmount);
 
 		// Top Image
 		if(this._scrollAmount != 0)
 		{
-			//context.drawImage(this._image, this.x, this.y + this._scrollAmount - this._image.height);
+			context.drawImage(this._image,
+				0, this._image.height - this._scrollAmount, this._image.width, this._scrollAmount,
+				this.x, this.y, this._image.width, this._scrollAmount);
+			// context.drawImage(this._image,
+			// 	0, 0, this._image.width, this._image.height,
+			// 	this.x, this.y - this._image.height + this._scrollAmount, this._image.width, this._image.height);
 		}
 
 		var date = new Date();
