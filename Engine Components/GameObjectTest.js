@@ -15,10 +15,13 @@ function TestGameObject()
         user_data.border_color = '#555';
         this.pBody = gPhysicsEngine.addBody("box", "dynamic", 20/scale, 200/scale, 40/scale, 40/scale, user_data, this, this.physicsUpdate);
 
-        this.pBody.ApplyImpulse(
+        /*this.pBody.ApplyImpulse(
             new b2Vec2(10,0),
             this.pBody.GetWorldCenter()
-        );
+        );*/
+
+        this.pBody.SetLinearVelocity(new b2Vec2(1,0));
+
 
 	}
 

@@ -17,7 +17,7 @@ function PhysicsEngine(){
 PhysicsEngine.prototype.world = null;
 PhysicsEngine.prototype.PHYSICS_LOOP_HZ = 1.0/60;
 
-PhysicsEngine.prototype.create = function () {
+PhysicsEngine.prototype.init = function () {
 	
 	b2Vec2 = Box2D.Common.Math.b2Vec2;
 	b2AABB = Box2D.Collision.b2AABB;

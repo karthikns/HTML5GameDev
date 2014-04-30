@@ -1,11 +1,11 @@
-gGameEngine = new function GameEngine()
+function GameEngine()
 {
 }
 
 GameEngine.prototype.initialize = function(masterAssetFile, callback)
 {
     gInputEngine.setup();
-    gPhysicsEngine.create();
+    gPhysicsEngine.init();
     imageRepository.initialize(masterAssetFile, callback);
 }
 
@@ -21,6 +21,8 @@ GameEngine.prototype.beginGame = function()
     renderPool.render();
     setTimeout(render, 1000/60); //60FPS
 }
+
+gGameEngine = new GameEngine();
 
 function GameObject(x, y, width, height)
 {	
