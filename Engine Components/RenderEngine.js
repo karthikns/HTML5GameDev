@@ -2,7 +2,7 @@ imageRepository = new function ImageRepository()
 {
 	this.images = new Object();
 
-	this.initialize = function(configFile)
+	this.initialize = function(configFile, callback)
 	{
 		var xmlHttpRequest = new XMLHttpRequest();
 
@@ -45,7 +45,7 @@ imageRepository = new function ImageRepository()
 
 				if(imagesLoaded === numberOfImages)
 				{
-					init();
+					callback();
 				}
 			}
 
