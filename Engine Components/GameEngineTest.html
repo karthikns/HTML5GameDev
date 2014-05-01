@@ -18,22 +18,49 @@
 			gGameEngine.setCanvas(canvasElement);
 		}
 
-		function init()
-		{
-			var enemyShip = new Ship();
-			enemyShip.setPosition(50, 50);
-			enemyShip.setWidthHeight(42, 32);
-			enemyShip.setImage("eship");
-            enemyShip.initialize();
-
-			gGameEngine.beginGame();
-		}
-
         function render()
         {
             renderPool.render();
             setTimeout(render, 1000/60); //60FPS
         }
+
+        function EnemyPool()
+        {
+        }
+
+        EnemyPool.prototype.pool = null;
+
+        EnemyPool.prototype.initialize = function(numRow, numCol)
+        {
+        	this.pool = new Array();
+
+        	for(var row = 0; row < numRow; ++row)
+        	{
+	        	for(var col = 0; col < numCol; ++col)
+	        	{
+	        		var x = 50 + col * 60;
+	        		var y = 10 + row * 50;
+
+					var enemyShip = new Ship();
+					enemyShip.setPosition(x, y);
+					enemyShip.setWidthHeight(42, 32);
+					enemyShip.setImage("eship");
+
+		            this.pool[this.pool.length] = enemyShip;
+
+		            enemyShip.initialize();
+	        	}
+        	}
+        }
+
+		function init()
+		{
+			var enemyPool = new EnemyPool();
+			enemyPool.initialize(2, 5);
+
+			gGameEngine.beginGame();
+		}
+
 		-->
 		</script>
 	</head>
