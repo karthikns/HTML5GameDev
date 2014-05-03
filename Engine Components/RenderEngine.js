@@ -190,7 +190,7 @@ ImageRendererScroll.prototype.render = function(context)
 	}
 	else
 	{
-		context.drawImage(this._image, this.x, this.y);
+		context.drawImage(this._image, this.x - this.halfWidth, this.y - this.halfHeight);
 	}
 }
 
