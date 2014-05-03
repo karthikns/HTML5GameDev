@@ -38,8 +38,8 @@
         	{
 	        	for(var col = 0; col < numCol; ++col)
 	        	{
-	        		var x = 50 + col * 60;
-	        		var y = 10 + row * 50;
+	        		var x = 70 + col * 60;
+	        		var y = 30 + row * 50;
 
 					var enemyShip = new Ship();
 					enemyShip.setPosition(x, y);
@@ -60,6 +60,16 @@
             for(var i=0; i<enemyPool.pool.length; i++ ) {
                 enemyPool.pool[i].moveLeft();
             }
+
+            var playerShip = new PlayerShip();
+            playerShip.setPosition(250, 250);
+            playerShip.setWidthHeight(42,32);
+            playerShip.setImage("ship");
+            playerShip.setLeftKey(37);
+            playerShip.setUpKey(38);
+            playerShip.setRightKey(39);
+            playerShip.setDownKey(40);
+            playerShip.initialize();
 
 			gGameEngine.beginGame();
 		}
