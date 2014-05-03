@@ -52,15 +52,15 @@ PhysicsEngine.prototype.init = function () {
 
 PhysicsEngine.prototype.draw_world = function() {
     //first clear the canvas
-    this.ctx.clearRect( 0 , 0 , 600, 360 );
+    this.ctx.clearRect( 500 , 0 , 1000, 300 );
      
-    this.ctx.fillStyle = '#FFF4C9';
-    this.ctx.fillRect(0,0, 600, 360);
+    this.ctx.fillStyle = '#FFFFF';
+    this.ctx.fillRect(500,0, 1000, 300);
          
     //convert the canvas coordinate directions to cartesian
     this.ctx.save();
-    this.ctx.translate(0 , 360);
-    this.ctx.scale(1 , -1);
+    this.ctx.translate(0 , 0);
+    this.ctx.scale(1 , 1);
     gPhysicsEngine.world.DrawDebugData();
     this.ctx.restore();
 }
