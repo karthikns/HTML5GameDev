@@ -57,6 +57,9 @@
 		{
 			var enemyPool = new EnemyPool();
 			enemyPool.initialize(2, 5);
+            for(var i=0; i<enemyPool.pool.length; i++ ) {
+                enemyPool.pool[i].moveLeft();
+            }
 
 			gGameEngine.beginGame();
 		}

@@ -59,11 +59,11 @@ GameObject.prototype.physicsUpdate = function(gameObject, physicsObject)
     console.log(outputString);
 
     //update game object x & y
-    gameObject._x = physicsObject.m_xf.position.x;
-    gameObject._y = physicsObject.m_xf.position.y;
-    if(gameObject.imageRender !== undefined) {
-        gameObject.imageRender.x = physicsObject.m_xf.position.x;
-        gameObject.imageRender.y = physicsObject.m_xf.position.y;
+    gameObject._x = physicsObject.m_xf.position.x * scale;
+    gameObject._y = physicsObject.m_xf.position.y * scale;
+    if(gameObject.imageRenderer !== undefined) {
+        gameObject.imageRenderer.x = physicsObject.m_xf.position.x * scale;
+        gameObject.imageRenderer.y = physicsObject.m_xf.position.y * scale;
     }
 
 }
@@ -78,7 +78,7 @@ Ship.prototype._bullets = new Array();
 Ship.prototype._width = 0;
 Ship.prototype._height = 0;
 Ship.prototype._imageId = null;
-Ship.prototype._velocity = 0;
+Ship.prototype._velocity = 1;
 
 Ship.prototype.setImage = function(imageId)
 {
@@ -99,7 +99,7 @@ Ship.prototype.initialize = function()
     //------------------------------
     this.physicsBody = gPhysicsEngine.addBody("ship", "dynamic", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate);
 
-    this.setMoveVelocity(0);
+    this.setMoveVelocity(5);
 }
 
 Ship.prototype.setMoveVelocity = function(velocity)
