@@ -55,9 +55,17 @@
 
 		function init()
 		{
+			var scrollRend = new ImageRendererScroll("bg", 32);
+			scrollRend.x = 100;
+			scrollRend.y = 10;
+			renderPool.addObject(scrollRend);
+			scrollRend.startScroll();
+
 			var enemyPool = new EnemyPool();
 			enemyPool.initialize(2, 5);
-            for(var i=0; i<enemyPool.pool.length; i++ ) {
+
+            for(var i=0; i<enemyPool.pool.length; i++ )
+            {
                 enemyPool.pool[i].moveLeft();
             }
 
