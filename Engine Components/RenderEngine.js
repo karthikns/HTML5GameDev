@@ -203,15 +203,17 @@ function AnimRenderer(imageNames, frameRate)
 		this.images[index] = imageRepository.getImage(imageNames[index]);
 	}
 
+	this.halfWidth = this.images[0].width / 2;
+	this.halfHeight = this.images[0].height / 2;
+
 	this.frameRate = frameRate;
 	this.frameDuration =  Math.floor(1000 / frameRate); // milliseconds
 	this.totalAnimTime = imageNames.length * this.frameDuration; // milliseconds
 }
 
-AnimRenderer.prototype.x = 0;
-AnimRenderer.prototype.y = 0;
-AnimRenderer.prototype.images = null;
+AnimRenderer.prototype = new RenderObject();
 
+AnimRenderer.prototype.images = null;
 AnimRenderer.prototype.isAnimStarted = false;
 AnimRenderer.prototype.frameRate = 0;		// FPS
 AnimRenderer.prototype.lastStartTime = 0; 	// milliseconds
@@ -246,7 +248,7 @@ AnimRenderer.prototype.render = function(context)
 		image = this.images[currentFrame];
 	}
 
-	context.drawImage(image, this.x, this.y);
+	context.drawImage(image, this.x - this.halfWidth, this.y - this.halfHeight);
 }
 
 // TODO: Test this
