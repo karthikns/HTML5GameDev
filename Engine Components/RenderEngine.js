@@ -111,32 +111,41 @@ renderPool = new function RenderPool()
 	}
 }
 
-function ImageRenderer(imageName)
+function RenderObject()
 {
-	this.x = 0;
-	this.y = 0;
-	this.image = imageRepository.getImage(imageName);
 }
 
-ImageRenderer.prototype.x = 0;
-ImageRenderer.prototype.y = 0;
+RenderObject.prototype.x = 0;
+RenderObject.prototype.y = 0;
+RenderObject.prototype.halfWidth = 0;
+RenderObject.prototype.halfHeight = 0;
+
+function ImageRenderer(imageName)
+{
+	this.image = imageRepository.getImage(imageName);
+
+	this.halfWidth = this.image.width / 2;
+	this.halfHeight = this.image.height / 2;
+}
+
+ImageRenderer.prototype = new RenderObject();
 ImageRenderer.prototype.image = null;
 
 ImageRenderer.prototype.render = function(context)
 {
-	context.drawImage(this.image, this.x, this.y);
+	context.drawImage(this.image, this.x - this.halfWidth, this.y - this.halfHeight);
 }
 
 function ImageRendererScroll(imageName, frameRate)
 {
-	this.x = 0;
-	this.y = 0;
 	this._image = imageRepository.getImage(imageName);	
+	this.halfWidth = this._image.width / 2;
+	this.halfHeight = this._image.height / 2;
+
 	this._frameDuration =  Math.floor(1000 / frameRate); // milliseconds
 }
 
-ImageRendererScroll.prototype.x = 0;
-ImageRendererScroll.prototype.y = 0;
+ImageRendererScroll.prototype = new RenderObject();
 ImageRendererScroll.prototype._image = null;
 ImageRendererScroll.prototype._frameDuration = 0;
 ImageRendererScroll.prototype._scrollAmount = 0;
@@ -158,30 +167,19 @@ ImageRendererScroll.prototype.stopScroll = function()
 
 ImageRendererScroll.prototype.render = function(context)
 {
-	// TODO: NOT WORKING
 	if(this._isScrolling == true)
 	{
-		// context.drawImage(this._image, this.x, this.y + this._scrollAmount);
-		// context.drawImage(this._image, this.x, this.y + this._scrollAmount - this._image.height);
-
-			// 0, 0, this._image.width, this._image.height,
-
-		console.log(this.x + " " + this.y + " " + this._image.width + " " + this._image.height + " " + this._scrollAmount);
-
 		// Bottom Image: ORIGINAL
 		context.drawImage(this._image,
 			0, 0, this._image.width, this._image.height - this._scrollAmount,
-			this.x, this.y + this._scrollAmount, this._image.width, this._image.height - this._scrollAmount);
+			this.x - this.halfWidth, this.y + this._scrollAmount - this.halfHeight, this._image.width, this._image.height - this._scrollAmount);
 
 		// Top Image
 		if(this._scrollAmount != 0)
 		{
 			context.drawImage(this._image,
 				0, this._image.height - this._scrollAmount, this._image.width, this._scrollAmount,
-				this.x, this.y, this._image.width, this._scrollAmount);
-			// context.drawImage(this._image,
-			// 	0, 0, this._image.width, this._image.height,
-			// 	this.x, this.y - this._image.height + this._scrollAmount, this._image.width, this._image.height);
+				this.x - this.halfWidth, this.y - this.halfHeight, this._image.width, this._scrollAmount);
 		}
 
 		var date = new Date();
