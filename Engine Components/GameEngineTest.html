@@ -83,12 +83,21 @@
             playerShip.setMaskBits(23);
             playerShip.initialize();
 
-            createBoundry();
+            var gun = new Gun();
+            gun.setPosition(0, 0);
+            gun.setBulletImage("b1");
+            gun.setBulletWidthHeight(2, 14);
+            gun.setBulletVelocity(0, 10);
+
+            enemyPool.pool[enemyPool.pool.length - 1].setGun(gun);
+            enemyPool.pool[enemyPool.pool.length - 1].fire();
+
+            createBoundary();
 
 			gGameEngine.beginGame();
 		}
 
-        function createBoundry()
+        function createBoundary()
         {
             var leftWall = new Wall();
             leftWall.setPosition(0,0);

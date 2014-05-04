@@ -178,7 +178,7 @@ Ship.prototype.fire = function()
 {
     if(this._gun)
     {
-        this._bullets[this._bullets.length] = this._gun.fire();
+        this._bullets[this._bullets.length] = this._gun.fire(this._x, this._y);
     }
 }
 
@@ -257,6 +257,8 @@ Bullet.prototype.setMoveVelocity = function(x, y)
 Bullet.prototype.initialize = function()
 {
     this.imageRenderer = new ImageRenderer(this._imageId, 5);
+    this.imageRenderer.x = this._x;
+    this.imageRenderer.y = this._y;
     renderPool.addObject(this.imageRenderer);
 
     //-----Debug data---------------
@@ -264,8 +266,9 @@ Bullet.prototype.initialize = function()
     user_data.fill_color = 'rgba(2,100,0,0.3)';
     user_data.border_color = '#555';
     //------------------------------
-    this.physicsBody = gPhysicsEngine.addBody("bullet", "dynamic", 100/scale, 50/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate, this.categoryBits, this.maskBits);
-    this.setMoveVelocity(this._velocity.x, this._velocity.y);
+    this.physicsBody = gPhysicsEngine.addBody("bullet", "dynamic", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate, this.categoryBits, this.maskBits);
+
+    gPhysicsEngine.setMoveVelocity(this.physicsBody, {x: this._velocityX, y: this._velocityY} );
 }
 
 function Gun()
