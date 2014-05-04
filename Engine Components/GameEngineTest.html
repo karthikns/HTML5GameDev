@@ -72,13 +72,18 @@
             }
 
             var playerShip = new PlayerShip();
+
             playerShip.setPosition(250, 250);
             playerShip.setWidthHeight(64,52);
+
             playerShip.setImage("ship");
+
             playerShip.setLeftKey(37);
             playerShip.setUpKey(38);
             playerShip.setRightKey(39);
             playerShip.setDownKey(40);
+            playerShip.setFireKey(32); // Space
+
             playerShip.setCategoryBits(2);
             playerShip.setMaskBits(23);
             playerShip.initialize();
@@ -87,10 +92,12 @@
             gun.setPosition(0, 0);
             gun.setBulletImage("b1");
             gun.setBulletWidthHeight(2, 14);
-            gun.setBulletVelocity(0, 10);
+            gun.setBulletVelocity(0, -10);
 
-            enemyPool.pool[enemyPool.pool.length - 1].setGun(gun);
-            enemyPool.pool[enemyPool.pool.length - 1].fire();
+            playerShip.setGun(gun);
+
+            // enemyPool.pool[enemyPool.pool.length - 1].setGun(gun);
+            // enemyPool.pool[enemyPool.pool.length - 1].fire();
 
             createBoundary();
 

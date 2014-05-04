@@ -187,7 +187,7 @@ function PlayerShip()
 }
 
 PlayerShip.prototype = new Ship();
-PlayerShip.prototype._fireDuration = 100; // 100ms for each bullet
+PlayerShip.prototype._fireDuration = 1000; // 100ms for each bullet
 PlayerShip.prototype._lastFireTime = 0;   // in ms
 
 PlayerShip.prototype.setLeftKey = function(keyCode)
