@@ -13,6 +13,7 @@ function InputEngineClass()
 InputEngineClass.prototype.mouse = new PointClass();
 InputEngineClass.prototype.bindings = new Object();
 InputEngineClass.prototype.actions = new Object();
+InputEngineClass.prototype.stop = new Object();
 
 InputEngineClass.prototype.setup = function()
 {
@@ -22,30 +23,32 @@ InputEngineClass.prototype.setup = function()
 
 InputEngineClass.prototype.onKeyUp = function(event) 
 {
-	var action = gInputEngine.bindings[event.keyCode];
-
-	if (action)
-	{
-		gInputEngine.actions[event.keyCode]();
-		console.log("Key Up: " + action);
-	}
+	var exist = gInputEngine.bindings[event.keyCode];
+    var action = gInputEngine.actions[event.keyCode];
+	if(exist) {
+        gInputEngine.stop.method.call(gInputEngine.stop.obj);
+    }
 }
 
 InputEngineClass.prototype.onKeyDown = function(event)
 {
-	var action = gInputEngine.bindings[event.keyCode];
-
-	if (action)
+	var exist = gInputEngine.bindings[event.keyCode];
+    var action = gInputEngine.actions[event.keyCode];
+	if (exist)
 	{
-		gInputEngine.actions[event.keyCode]();
+		action.method.call(action.obj);
 		console.log("Key Down: " + action);
 	}
 }
 
-InputEngineClass.prototype.bind = function(key, action)
+InputEngineClass.prototype.bind = function(key, action, obj)
 {
 	this.bindings[key] = true;
-    this.actions[key] = action;
+    this.actions[key] = new Object();
+    this.actions[key].method = action;
+    this.actions[key].obj = obj;
+    this.stop.method = obj.setZeroVelocity;
+    this.stop.obj = obj;
 }
 
 gInputEngine = new InputEngineClass();
