@@ -78,8 +78,6 @@ GameObject.prototype.physicsUpdate = function(gameObject, physicsObject)
     if(gameObject === undefined) {
         return;
     }
-    var outputString = gameObject.str + "( " + physicsObject.m_xf.position.x + " , " + physicsObject.m_xf.position.y + " )";
-    console.log(outputString);
 
     //update game object x & y
     gameObject._x = physicsObject.m_xf.position.x * scale;
