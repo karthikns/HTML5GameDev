@@ -78,8 +78,18 @@ AudioPlayback.prototype.stopPlayback = function()
 
 AudioPlayback.prototype.setLooping = function()
 {
-	this.isLooping = true;
-	this.sound.loop = true;
+	//this.isLooping = true;
+	//this.sound.loop = true;
+	if(this.isLooping === true)
+		this.isLooping = false;
+	else
+		this.isLooping = true;
+	
+	if(this.isLooping)
+		this.sound.loop = true;
+	else
+		this.sound.loop = false;
+	console.log("loop set :"+this.isLooping);
 }
 
 soundpool = new function SoundPool(){
