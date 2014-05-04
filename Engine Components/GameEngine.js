@@ -23,29 +23,6 @@ GameEngine.prototype.beginGame = function()
     window.setInterval(gPhysicsEngine.update, 1000/60);
 }
 
-GameEngine.prototype.createBoundry = function()
-{
-    var leftWall = new Wall();
-    leftWall.setPosition(0,0);
-    leftWall.setWidthHeight(1,600);
-    leftWall.initialize();
-
-    var rightWall = new Wall();
-    rightWall.setPosition(500,0);
-    rightWall.setWidthHeight(1,600);
-    rightWall.initialize();
-
-    var topWall = new Wall();
-    topWall.setPosition(0,-20);
-    topWall.setWidthHeight(1000,1);
-    topWall.initialize();
-
-    var bottomWall = new Wall();
-    bottomWall.setPosition(0,320);
-    bottomWall.setWidthHeight(1000,1);
-    bottomWall.initialize();
-}
-
 gGameEngine = new GameEngine();
 
 function GameObject(x, y, width, height)
@@ -89,12 +66,33 @@ GameObject.prototype.physicsUpdate = function(gameObject, physicsObject)
 
 }
 
+function RenderPhysicsObject()
+{
+
+}
+
+RenderPhysicsObject.prototype = new GameObject();
+RenderPhysicsObject.prototype.categoryBits = 1;
+RenderPhysicsObject.prototype.maskBits = 1;
+
+RenderPhysicsObject.prototype.setCategoryBits = function (categoryBits)
+{
+    this.categoryBits = categoryBits;
+}
+
+RenderPhysicsObject.prototype.setMaskBits = function(maskBits)
+{
+    this.maskBits = maskBits;
+}
+
+
+
 function Wall()
 {
 
 }
 
-Wall.prototype = new GameObject();
+Wall.prototype = new RenderPhysicsObject();
 
 Wall.prototype.initialize = function()
 {
@@ -103,7 +101,7 @@ Wall.prototype.initialize = function()
     user_data.fill_color = 'rgba(2,100,0,0.3)';
     user_data.border_color = '#555';
     //------------------------------
-    this.physicsBody = gPhysicsEngine.addBody("wall", "static", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate);
+    this.physicsBody = gPhysicsEngine.addBody("wall", "static", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate, this.categoryBits, this.maskBits);
 }
 
 function Ship()
@@ -111,7 +109,7 @@ function Ship()
 
 }
 
-Ship.prototype = new GameObject();
+Ship.prototype = new RenderPhysicsObject();
 Ship.prototype._bullets = new Array();
 Ship.prototype._width = 0;
 Ship.prototype._height = 0;
@@ -136,7 +134,7 @@ Ship.prototype.initialize = function()
     user_data.fill_color = 'rgba(2,100,0,0.3)';
     user_data.border_color = '#555';
     //------------------------------
-    this.physicsBody = gPhysicsEngine.addBody("ship", "dynamic", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate);
+    this.physicsBody = gPhysicsEngine.addBody("ship", "dynamic", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate, this.categoryBits, this.maskBits);
 
     this.setMoveVelocity(5);
 }
@@ -266,7 +264,7 @@ Bullet.prototype.initialize = function()
     user_data.fill_color = 'rgba(2,100,0,0.3)';
     user_data.border_color = '#555';
     //------------------------------
-    this.physicsBody = gPhysicsEngine.addBody("bullet", "dynamic", 100/scale, 50/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate);
+    this.physicsBody = gPhysicsEngine.addBody("bullet", "dynamic", 100/scale, 50/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate, this.categoryBits, this.maskBits);
     this.setMoveVelocity(this._velocity.x, this._velocity.y);
 }
 

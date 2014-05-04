@@ -78,43 +78,7 @@ PhysicsEngine.prototype.registerBody = function (bodyDef) {
 	return body;
 }
 
-//PhysicsEngine.prototype.addBody = function (entityDef) {
-//	var bodyDef = new b2BodyDef();
-//
-//	var id = entityDef.id;
-//
-//	if(entityDef.type == 'static') {
-//		bodyDef.type = b2Body.b2_staticBody;
-//	} else {
-//		bodyDef.type = b2Body.b2_dynamicBody;
-//	}
-//
-//    bodyDef.userData = entityDef.userData;
-//
-//	bodyDef.position.x = entityDef.x;
-//	bodyDef.position.y = entityDef.y;
-//	bodyDef.linearDamping = entityDef.info.linearDamping;
-//	bodyDef.angularDamping = entityDef.info.angularDamping;
-//
-//	var body = this.registerBody(bodyDef);
-//	var fixtureDefinition = new b2FixtureDef();
-//
-//	if(entityDef.useBouncyFixture) {
-//		fixtureDefinition.density = entityDef.info.density;
-//		fixtureDefinition.friction = entityDef.info.friction;
-//		fixtureDefinition.restitution = entityDef.info.restitution;
-//
-//	}
-//
-//	// Now we define the shape of this object as a box
-//	fixtureDefinition.shape = new b2PolygonShape();
-//	fixtureDefinition.shape.SetAsBox(entityDef.halfWidth, entityDef.halfHeight);
-//	body.CreateFixture(fixtureDefinition);
-//
-//	return body;
-//}
-
-PhysicsEngine.prototype.addBody = function (id, type, x, y, w, h, userData, userObject, userFunc) {
+PhysicsEngine.prototype.addBody = function (id, type, x, y, w, h, userData, userObject, userFunc, categoryBits, maskBits) {
     var bodyDef = new b2BodyDef();
 
     bodyDef.userObject = userObject;
@@ -136,13 +100,12 @@ PhysicsEngine.prototype.addBody = function (id, type, x, y, w, h, userData, user
 	var body = this.registerBody(bodyDef);
 	var fixtureDefinition = new b2FixtureDef();
 
-	//if(entityDef.useBouncyFixture) {
-		fixtureDefinition.density = 10;
-		fixtureDefinition.friction = 0.0;
-		fixtureDefinition.restitution = 1;
-        //fixtureDefinition.filter.groupIndex = 10;
-
-	//}
+    fixtureDefinition.density = 10;
+    fixtureDefinition.friction = 0.0;
+    fixtureDefinition.restitution = 1;
+    //fixtureDefinition.filter.groupIndex = 10;
+    fixtureDefinition.filter.categoryBits = categoryBits;
+    fixtureDefinition.filter.maskBits = maskBits;
 
 	// Now we define the shape of this object as a box
 	fixtureDefinition.shape = new b2PolygonShape();

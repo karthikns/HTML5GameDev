@@ -45,6 +45,8 @@
 					enemyShip.setPosition(x, y);
 					enemyShip.setWidthHeight(42, 32);
 					enemyShip.setImage("eship");
+                    enemyShip.setCategoryBits(4);
+                    enemyShip.setMaskBits(15);
 
 		            this.pool[this.pool.length] = enemyShip;
 
@@ -77,12 +79,45 @@
             playerShip.setUpKey(38);
             playerShip.setRightKey(39);
             playerShip.setDownKey(40);
+            playerShip.setCategoryBits(2);
+            playerShip.setMaskBits(23);
             playerShip.initialize();
 
-            gGameEngine.createBoundry();
+            createBoundry();
 
 			gGameEngine.beginGame();
 		}
+
+        function createBoundry()
+        {
+            var leftWall = new Wall();
+            leftWall.setPosition(0,0);
+            leftWall.setWidthHeight(1,600);
+            leftWall.setCategoryBits(1);
+            leftWall.setMaskBits(30);
+            leftWall.initialize();
+
+            var rightWall = new Wall();
+            rightWall.setPosition(500,0);
+            rightWall.setWidthHeight(1,600);
+            rightWall.setCategoryBits(1);
+            rightWall.setMaskBits(30);
+            rightWall.initialize();
+
+            var topWall = new Wall();
+            topWall.setPosition(0,-20);
+            topWall.setWidthHeight(1000,1);
+            topWall.setCategoryBits(1);
+            topWall.setMaskBits(30);
+            topWall.initialize();
+
+            var bottomWall = new Wall();
+            bottomWall.setPosition(0,320);
+            bottomWall.setWidthHeight(1000,1);
+            bottomWall.setCategoryBits(1);
+            bottomWall.setMaskBits(30);
+            bottomWall.initialize();
+        }
 
 		-->
 		</script>
