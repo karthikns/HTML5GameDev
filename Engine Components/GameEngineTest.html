@@ -71,13 +71,15 @@
 
             var playerShip = new PlayerShip();
             playerShip.setPosition(250, 250);
-            playerShip.setWidthHeight(42,32);
+            playerShip.setWidthHeight(64,52);
             playerShip.setImage("ship");
             playerShip.setLeftKey(37);
             playerShip.setUpKey(38);
             playerShip.setRightKey(39);
             playerShip.setDownKey(40);
             playerShip.initialize();
+
+            gGameEngine.createBoundry();
 
 			gGameEngine.beginGame();
 		}

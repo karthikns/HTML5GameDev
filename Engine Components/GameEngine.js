@@ -23,6 +23,29 @@ GameEngine.prototype.beginGame = function()
     window.setInterval(gPhysicsEngine.update, 1000/60);
 }
 
+GameEngine.prototype.createBoundry = function()
+{
+    var leftWall = new Wall();
+    leftWall.setPosition(0,0);
+    leftWall.setWidthHeight(1,600);
+    leftWall.initialize();
+
+    var rightWall = new Wall();
+    rightWall.setPosition(500,0);
+    rightWall.setWidthHeight(1,600);
+    rightWall.initialize();
+
+    var topWall = new Wall();
+    topWall.setPosition(0,-20);
+    topWall.setWidthHeight(1000,1);
+    topWall.initialize();
+
+    var bottomWall = new Wall();
+    bottomWall.setPosition(0,320);
+    bottomWall.setWidthHeight(1000,1);
+    bottomWall.initialize();
+}
+
 gGameEngine = new GameEngine();
 
 function GameObject(x, y, width, height)
@@ -66,6 +89,23 @@ GameObject.prototype.physicsUpdate = function(gameObject, physicsObject)
         gameObject.imageRenderer.y = physicsObject.m_xf.position.y * scale;
     }
 
+}
+
+function Wall()
+{
+
+}
+
+Wall.prototype = new GameObject();
+
+Wall.prototype.initialize = function()
+{
+    //-----Debug data---------------
+    var user_data = new Object();
+    user_data.fill_color = 'rgba(2,100,0,0.3)';
+    user_data.border_color = '#555';
+    //------------------------------
+    this.physicsBody = gPhysicsEngine.addBody("wall", "static", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate);
 }
 
 function Ship()
