@@ -79,7 +79,18 @@ renderPool = new function RenderPool()
 	
 	this.addObject = function(obj)
 	{
-		this.pool[this.pool.length] = obj;
+		var insertIndex = 0;
+		for(insertIndex = 0; insertIndex < this.pool.length; ++insertIndex)
+		{
+			if(this.pool[insertIndex].zIndex >= obj.zIndex)
+			{
+				break;
+			}
+		}
+
+		this.pool.splice(insertIndex, 0, obj);
+
+		// this.pool[this.pool.length] = obj;
 	}
 
 	this.removeObject = function(obj)
@@ -119,13 +130,16 @@ RenderObject.prototype.x = 0;
 RenderObject.prototype.y = 0;
 RenderObject.prototype.halfWidth = 0;
 RenderObject.prototype.halfHeight = 0;
+RenderObject.prototype.zIndex = 0;
 
-function ImageRenderer(imageName)
+function ImageRenderer(imageName, zIndex)
 {
 	this.image = imageRepository.getImage(imageName);
 
 	this.halfWidth = this.image.width / 2;
 	this.halfHeight = this.image.height / 2;
+
+	this.zIndex = zIndex;
 }
 
 ImageRenderer.prototype = new RenderObject();
@@ -136,11 +150,12 @@ ImageRenderer.prototype.render = function(context)
 	context.drawImage(this.image, this.x - this.halfWidth, this.y - this.halfHeight);
 }
 
-function ImageRendererScroll(imageName, frameRate)
+function ImageRendererScroll(imageName, frameRate, zIndex)
 {
 	this._image = imageRepository.getImage(imageName);	
 	this.halfWidth = this._image.width / 2;
 	this.halfHeight = this._image.height / 2;
+	this.zIndex = zIndex;
 
 	this._frameDuration =  Math.floor(1000 / frameRate); // milliseconds
 }
@@ -194,7 +209,7 @@ ImageRendererScroll.prototype.render = function(context)
 	}
 }
 
-function AnimRenderer(imageNames, frameRate)
+function AnimRenderer(imageNames, frameRate, zIndex)
 {
 	this.images = new Array(imageNames.length);
 
@@ -205,6 +220,8 @@ function AnimRenderer(imageNames, frameRate)
 
 	this.halfWidth = this.images[0].width / 2;
 	this.halfHeight = this.images[0].height / 2;
+
+	this.zIndex = zIndex;
 
 	this.frameRate = frameRate;
 	this.frameDuration =  Math.floor(1000 / frameRate); // milliseconds
@@ -252,19 +269,21 @@ AnimRenderer.prototype.render = function(context)
 }
 
 // TODO: Test this
-function AnimManager()
+function AnimManager(zIndex)
 {
+	this.zIndex = zIndex;
 }
 
 AnimManager.prototype.x = 0;
 AnimManager.prototype.y = 0;
+AnimManager.prototype.zIndex = 0;
 
 AnimManager.prototype.currentAnim = null;
 AnimManager.prototype.animations = new Object();
 
 AnimManager.prototype.addAnimation = function(animName, imageNames, frameRate)
 {
-	this.animations[animName] = new AnimRenderer(imageNames, frameRate);
+	this.animations[animName] = new AnimRenderer(imageNames, frameRate, this.zIndex);
 }
 
 AnimManager.prototype.playAnimation = function(animName)

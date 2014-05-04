@@ -87,7 +87,7 @@ Ship.prototype.setImage = function(imageId)
 
 Ship.prototype.initialize = function()
 {
-    this.imageRenderer = new ImageRenderer(this._imageId);
+    this.imageRenderer = new ImageRenderer(this._imageId, 10);
     this.imageRenderer.x = this._x;
     this.imageRenderer.y = this._y;
     renderPool.addObject(this.imageRenderer);
@@ -193,7 +193,7 @@ Bullet.prototype.setMoveVelocity = function (x,y)
 
 Bullet.prototype.initialize = function()
 {
-    this.imageRenderer = new ImageRenderer(this._imageId);
+    this.imageRenderer = new ImageRenderer(this._imageId, 5);
     renderPool.addObject(this.imageRenderer);
 
     //-----Debug data---------------

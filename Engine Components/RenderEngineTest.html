@@ -19,36 +19,42 @@
 			renderPool.context = canvasContext;
 			renderPool.canvas = canvasElement;
 			
-			var imageRend = new ImageRenderer("ship");
+			var imageRend = new ImageRenderer("ship", 10);
 			imageRend.x = 50;
 			imageRend.y = 50;
 			renderPool.addObject(imageRend);
 			
 			var images = ["b1", "b2"];
-			var animRend = new AnimRenderer(images, 1);
+			var animRend = new AnimRenderer(images, 1, 10);
 			animRend.x = 200;
 			animRend.y = 200;
 			renderPool.addObject(animRend);
 			
-			var animRend2 = new AnimRenderer(images, 2.5);
+			var animRend2 = new AnimRenderer(images, 2.5, 10);
 			animRend2.x = 220;
 			animRend2.y = 200;
 			renderPool.addObject(animRend2);
 
-			var scrollRend = new ImageRendererScroll("ship", 32);
+			var scrollRend = new ImageRendererScroll("bg", 32, 0);
 			scrollRend.x = 500;
 			scrollRend.y = 200;
 			renderPool.addObject(scrollRend);
 			
 			var images = ["d0", "d1", "d2", "d3", "d4", "d5", "d6", "d7"];
-			deepBall = new AnimRenderer(images, 10);
+			deepBall = new AnimRenderer(images, 5, 10);
 			deepBall.x = 50;
 			deepBall.y = 200;
 			renderPool.addObject(deepBall);
-			
+
+			deepBall2 = new AnimRenderer(images, 20, 10);
+			deepBall2.x = 50;
+			deepBall2.y = 300;
+			renderPool.addObject(deepBall2);
+
 			animRend.startAnimation();
 			animRend2.startAnimation();
 			deepBall.startAnimation();
+			deepBall2.startAnimation();
 			scrollRend.startScroll();
 
 			render();
