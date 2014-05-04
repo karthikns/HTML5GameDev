@@ -28,19 +28,22 @@
 			apb.stopPlayback();
 		}
 		
+		function toggleLoop(element){
+			apb.setLooping()		
+		}
 		-->
 		</script>
 
 	</head>
 	<body>
-		<canvas id="my_canvas" width="400" height="400" style="border:1px solid #FF0000;">	
-	
+		<canvas id="my_canvas" width="200" height="200" style="border:1px solid #FF0000;">	
 		</canvas>
 			
-		<p>SOUND TEST</p>
+		<p>SOUND TEST BACKGROUND MUSIC</p>
 		<div><button id="clickStart" onclick="playAudio();" >Play</button></div>
 		<div><button id="clickPause" onclick="pauseAudio();" >Pause</button></div>
 		<div><button id="clickStop" onclick="stopAudio();" >Stop</button></div>
+		<div><input type="checkbox" id="checkLoop" checked="false" onchange="toggleLoop(this);" >LoopAudio</button></div>
 		<div id="display"> </div>
 		
 		
