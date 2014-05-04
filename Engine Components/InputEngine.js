@@ -29,10 +29,16 @@ InputEngineClass.prototype.onKeyUp = function(event)
 	{
 	    var action = gInputEngine.actions[event.keyCode];
 
-	    clearInterval(action.intervalId);
-	    action.intervalId = null;
+	    if(action.startAction != null)
+	    {
+		    clearInterval(action.intervalId);
+		    action.intervalId = null;
+		}
 
-        action.stopAction.call(action.obj);
+		if(action.stopAction != null)
+		{
+        	action.stopAction.call(action.obj);
+    	}
     }
 }
 
@@ -44,11 +50,14 @@ InputEngineClass.prototype.onKeyDown = function(event)
 	{
 	    var action = gInputEngine.actions[event.keyCode];
 
-		action.startAction.call(action.obj);
+    	if(action.startAction != null)
+    	{
+			action.startAction.call(action.obj);
 
-		if(action.intervalId == null)
-		{
-		    action.intervalId = setInterval(gInputEngine.update, 100, action.startAction, action.obj);
+			if(action.intervalId == null)
+			{
+			    action.intervalId = setInterval(gInputEngine.update, 100, action.startAction, action.obj);
+			}
 		}
 	}
 }
