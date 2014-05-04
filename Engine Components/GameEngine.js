@@ -114,8 +114,8 @@ Ship.prototype._bullets = new Array();
 Ship.prototype._width = 0;
 Ship.prototype._height = 0;
 Ship.prototype._imageId = null;
-Ship.prototype._velocity = 1;
-Ship.prototype._gun = null;
+Ship.prototype._velocity = 5;
+Ship.prototype._guns = new Array();
 
 Ship.prototype.setImage = function(imageId)
 {
@@ -135,8 +135,6 @@ Ship.prototype.initialize = function()
     user_data.border_color = '#555';
     //------------------------------
     this.physicsBody = gPhysicsEngine.addBody("ship", "dynamic", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate, this.categoryBits, this.maskBits);
-
-    this.setMoveVelocity(5);
 }
 
 Ship.prototype.setMoveVelocity = function(velocity)
@@ -169,16 +167,21 @@ Ship.prototype.moveDown = function()
     gPhysicsEngine.setMoveVelocity(this.physicsBody, {x: 0, y:this._velocity} );
 }
 
-Ship.prototype.setGun = function(gun)
+Ship.prototype.addGun = function(gun)
 {
-    this._gun = gun;
+    this._guns[this._guns.length] = gun;
 }
 
 Ship.prototype.fire = function()
 {
-    if(this._gun)
+    for(var gunIndex = 0; gunIndex < this._guns.length; ++gunIndex)
     {
-        this._bullets[this._bullets.length] = this._gun.fire(this._x, this._y);
+        var gun = this._guns[gunIndex];
+
+        if(gun)
+        {
+            this._bullets[this._bullets.length] = gun.fire(this._x, this._y);
+        }
     }
 }
 
@@ -215,21 +218,28 @@ PlayerShip.prototype.setFireKey = function(keyCode)
     gInputEngine.bind(keyCode, this.userFire, null, this);
 }
 
-PlayerShip.prototype.setFireInterval = function(fireRate)
+PlayerShip.prototype.setFireRate = function(fireRate)
 {
-    this._fireDuration = 1000 / fireRate;
+    if(fireRate == 0)
+    {
+        this._fireDuration = 9999999999999;
+    }
+    else
+    {
+        this._fireDuration = 1000 / fireRate;
+    }
 }
 
 PlayerShip.prototype.userFire = function()
 {
-        var date = new Date();
-        var currentTime = date.getTime();
+    var date = new Date();
+    var currentTime = date.getTime();
 
-        if(currentTime - this._lastFireTime > this._fireDuration)
-        {
-            this.fire();
-            this._lastFireTime = currentTime;
-        }
+    if(currentTime - this._lastFireTime > this._fireDuration)
+    {
+        this.fire();
+        this._lastFireTime = currentTime;
+    }
 }
 
 
@@ -309,7 +319,6 @@ Gun.prototype.fire = function(holderX, holderY)
     bullet.setWidthHeight(this._bulletWidth, this._bulletHeight);
 
     bullet.setImage(this._bulletImageId);
-
     bullet.setMoveVelocity(this._bulletVelocityX, this._bulletVelocityY);
 
     bullet.initialize();

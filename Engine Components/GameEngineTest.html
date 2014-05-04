@@ -78,26 +78,37 @@
 
             playerShip.setImage("ship");
 
+            playerShip.setCategoryBits(2);
+            playerShip.setMaskBits(23);
+
+            playerShip.setMoveVelocity(10);
+
             playerShip.setLeftKey(37);
             playerShip.setUpKey(38);
             playerShip.setRightKey(39);
             playerShip.setDownKey(40);
             playerShip.setFireKey(32); // Space
 
-            playerShip.setCategoryBits(2);
-            playerShip.setMaskBits(23);
-            playerShip.initialize();
+            playerShip.setFireRate(6);
 
             var gun = new Gun();
-            gun.setPosition(0, 0);
+            gun.setPosition(10, -5);
             gun.setBulletImage("b1");
             gun.setBulletWidthHeight(2, 14);
             gun.setBulletVelocity(0, -10);
 
-            playerShip.setGun(gun);
+            playerShip.addGun(gun);
 
-            // enemyPool.pool[enemyPool.pool.length - 1].setGun(gun);
-            // enemyPool.pool[enemyPool.pool.length - 1].fire();
+			gun = new Gun();
+            gun.setPosition(-10, -5);
+            gun.setBulletImage("b1");
+            gun.setBulletWidthHeight(2, 14);
+            gun.setBulletVelocity(0, -10);
+
+            playerShip.addGun(gun);
+
+
+            playerShip.initialize();
 
             createBoundary();
 
