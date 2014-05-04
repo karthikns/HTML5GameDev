@@ -117,6 +117,7 @@ Ship.prototype._width = 0;
 Ship.prototype._height = 0;
 Ship.prototype._imageId = null;
 Ship.prototype._velocity = 1;
+Ship.prototype._gun = null;
 
 Ship.prototype.setImage = function(imageId)
 {
@@ -170,18 +171,17 @@ Ship.prototype.moveDown = function()
     gPhysicsEngine.setMoveVelocity(this.physicsBody, {x: 0, y:this._velocity} );
 }
 
+Ship.prototype.setGun = function(gun)
+{
+    this._gun = gun;
+}
+
 Ship.prototype.fire = function()
 {
-	var velocity = new Object();
-	velocity.x = 10;
-	velocity.y = 0;
-	this._bullets[this._bullets.length] = new Bullet();
-    this._bullets[this._bullets.length - 1]._x = this.x;
-    this._bullets[this._bullets.length - 1]._y = this.y;
-    this._bullets[this._bullets.length-1].setImage(imageId);
-    this.setMoveVelocity(velocity);
-    this.initialize();
-
+    if(this._gun)
+    {
+        this._bullets[this._bullets.length] = this._gun.fire();
+    }
 }
 
 function PlayerShip()
@@ -189,6 +189,8 @@ function PlayerShip()
 }
 
 PlayerShip.prototype = new Ship();
+PlayerShip.prototype._fireDuration = 100; // 100ms for each bullet
+PlayerShip.prototype._lastFireTime = 0;   // in ms
 
 PlayerShip.prototype.setLeftKey = function(keyCode)
 {
@@ -210,23 +212,48 @@ PlayerShip.prototype.setDownKey = function(keyCode)
     gInputEngine.bind(keyCode, this.moveDown, this.setZeroVelocity, this);
 }
 
+PlayerShip.prototype.setFireKey = function(keyCode)
+{
+    gInputEngine.bind(keyCode, this.userFire, null, this);
+}
+
+PlayerShip.prototype.setFireInterval = function(fireRate)
+{
+    this._fireDuration = 1000 / fireRate;
+}
+
+PlayerShip.prototype.userFire = function()
+{
+        var date = new Date();
+        var currentTime = date.getTime();
+
+        if(currentTime - this._lastFireTime > this._fireDuration)
+        {
+            this.fire();
+            this._lastFireTime = currentTime;
+        }
+}
+
+
 function Bullet()
 {
 }
 
 Bullet.prototype = new GameObject();
 
-Bullet._imageId = null;
-Bullet._velocity = 0;
+Bullet.prototype._imageId = null;
+Bullet.prototype._velocityX = 0;
+Bullet.prototype._velocityY = 0;
 
 Bullet.prototype.setImage = function(imageId)
 {
     this._imageId = imageId;
 }
 
-Bullet.prototype.setMoveVelocity = function (x,y)
+Bullet.prototype.setMoveVelocity = function(x, y)
 {
-    gPhysicsEngine.setMoveVelocity(this.physicsBody, {x:x, y:y} );
+    this._velocityX = x;
+    this._velocityY = y;
 }
 
 Bullet.prototype.initialize = function()
@@ -241,4 +268,50 @@ Bullet.prototype.initialize = function()
     //------------------------------
     this.physicsBody = gPhysicsEngine.addBody("bullet", "dynamic", 100/scale, 50/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate);
     this.setMoveVelocity(this._velocity.x, this._velocity.y);
+}
+
+function Gun()
+{
+}
+
+Gun.prototype = new GameObject();
+
+Gun.prototype._bulletImageId = null;
+Gun.prototype._bulletWidth = null;
+Gun.prototype._bulletHeight = null;
+
+Gun.prototype._bulletVelocityX = 0;
+Gun.prototype._bulletVelocityY = 5;
+
+Gun.prototype.setBulletImage = function(imageId)
+{
+    this._bulletImageId = imageId;
+}
+
+Gun.prototype.setBulletWidthHeight = function(w, h)
+{
+    this._bulletWidth = w;
+    this._bulletHeight = h;
+}
+
+Gun.prototype.setBulletVelocity = function(x, y)
+{
+    this._bulletVelocityX = x;
+    this._bulletVelocityY = y;
+}
+
+Gun.prototype.fire = function(holderX, holderY)
+{
+    var bullet = new Bullet();
+
+    bullet.setPosition(holderX + this._x, holderY + this._y);
+    bullet.setWidthHeight(this._bulletWidth, this._bulletHeight);
+
+    bullet.setImage(this._bulletImageId);
+
+    bullet.setMoveVelocity(this._bulletVelocityX, this._bulletVelocityY);
+
+    bullet.initialize();
+
+    return bullet;
 }
