@@ -24,31 +24,32 @@ InputEngineClass.prototype.setup = function()
 InputEngineClass.prototype.onKeyUp = function(event) 
 {
 	var exist = gInputEngine.bindings[event.keyCode];
-    var action = gInputEngine.actions[event.keyCode];
-	if(exist) {
-        gInputEngine.stop.method.call(gInputEngine.stop.obj);
+
+	if(exist)
+	{
+	    var action = gInputEngine.actions[event.keyCode];
+        action.stopAction.call(action.obj);
     }
 }
 
 InputEngineClass.prototype.onKeyDown = function(event)
 {
 	var exist = gInputEngine.bindings[event.keyCode];
-    var action = gInputEngine.actions[event.keyCode];
+
 	if (exist)
 	{
-		action.method.call(action.obj);
-		console.log("Key Down: " + action);
+	    var action = gInputEngine.actions[event.keyCode];
+		action.startAction.call(action.obj);
 	}
 }
 
-InputEngineClass.prototype.bind = function(key, action, obj)
+InputEngineClass.prototype.bind = function(key, startAction, stopAction, obj)
 {
 	this.bindings[key] = true;
     this.actions[key] = new Object();
-    this.actions[key].method = action;
+    this.actions[key].startAction = startAction;
+    this.actions[key].stopAction = stopAction;
     this.actions[key].obj = obj;
-    this.stop.method = obj.setZeroVelocity;
-    this.stop.obj = obj;
 }
 
 gInputEngine = new InputEngineClass();
