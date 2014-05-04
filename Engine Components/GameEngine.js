@@ -154,22 +154,22 @@ PlayerShip.prototype = new Ship();
 
 PlayerShip.prototype.setLeftKey = function(keyCode)
 {
-    gInputEngine.bind(keyCode, this.moveLeft, this);
+    gInputEngine.bind(keyCode, this.moveLeft, this.setZeroVelocity, this);
 }
 
 PlayerShip.prototype.setRightKey = function(keyCode)
 {
-    gInputEngine.bind(keyCode, this.moveRight, this);
+    gInputEngine.bind(keyCode, this.moveRight, this.setZeroVelocity, this);
 }
 
 PlayerShip.prototype.setUpKey = function(keyCode)
 {
-    gInputEngine.bind(keyCode, this.moveUp, this);
+    gInputEngine.bind(keyCode, this.moveUp, this.setZeroVelocity, this);
 }
 
 PlayerShip.prototype.setDownKey = function(keyCode)
 {
-    gInputEngine.bind(keyCode, this.moveDown, this);
+    gInputEngine.bind(keyCode, this.moveDown, this.setZeroVelocity, this);
 }
 
 function Bullet()
