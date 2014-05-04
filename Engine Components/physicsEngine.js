@@ -131,14 +131,16 @@ PhysicsEngine.prototype.addBody = function (id, type, x, y, w, h, userData, user
 	bodyDef.position.y = y;
 	bodyDef.linearDamping = 0.0;
 	bodyDef.angularDamping = 0.0;
+    bodyDef.fixedRotation = true;
 
 	var body = this.registerBody(bodyDef);
 	var fixtureDefinition = new b2FixtureDef();
 
 	//if(entityDef.useBouncyFixture) {
 		fixtureDefinition.density = 10;
-		fixtureDefinition.friction = 1.0;
-		fixtureDefinition.restitution = 0.5;
+		fixtureDefinition.friction = 0.0;
+		fixtureDefinition.restitution = 1;
+        //fixtureDefinition.filter.groupIndex = 10;
 
 	//}
 
