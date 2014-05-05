@@ -32,7 +32,7 @@
 
         EnemyPool.prototype.initialize = function(numRow, numCol)
         {
-			var percentFire = 0.005;
+			var percentFire = 0.003;
 
         	this.pool = new Array();
 
@@ -40,8 +40,8 @@
         	{
 	        	for(var col = 0; col < numCol; ++col)
 	        	{
-	        		var x = 70 + col * 60;
-	        		var y = 30 + row * 50;
+	        		var x = 170 + col * 60;
+	        		var y = 60 + row * 50;
 
 					var enemyShip = new Ship();
                     enemyShip.setId("enemyShip");
@@ -55,7 +55,9 @@
 		            gun.setPosition(0, 5);
 		            gun.setBulletImage("b2");
 		            gun.setBulletWidthHeight(2, 14);
+
 		            gun.setBulletVelocity(0, 10);
+
                     gun.setBulletType("enemy");
 
 		            enemyShip.addGun(gun);
@@ -64,6 +66,15 @@
 
 		            var intervalID = setInterval(enemyFire, 1000/60, enemyShip, percentFire);
 		            enemyShip.setKeyValue("intervalID", intervalID);
+
+                    if(row % 2 == 0)
+                    {
+                        enemyShip.moveLeft();
+                    }
+                    else
+                    {
+                        enemyShip.moveRight();
+                    }
 
 		            this.pool[this.pool.length] = enemyShip;
 	        	}
@@ -87,17 +98,12 @@
 			scrollRend.startScroll();
 
 			var enemyPool = new EnemyPool();
-			enemyPool.initialize(2, 5);
-
-            for(var i=0; i<enemyPool.pool.length; i++ )
-            {
-                enemyPool.pool[i].moveLeft();
-            }
+			enemyPool.initialize(4, 7);
 
             var playerShip = new PlayerShip();
 
             playerShip.setId("playerShip");
-            playerShip.setPosition(250, 250);
+            playerShip.setPosition(375, 400);
             playerShip.setWidthHeight(64,52);
 
             playerShip.setImage("ship");
@@ -113,7 +119,7 @@
             playerShip.setDownKey(40);
             playerShip.setFireKey(32); // Space
 
-            playerShip.setFireRate(6);
+            playerShip.setFireRate(2);
 
             var gun = new Gun();
             gun.setPosition(10, -5);
@@ -145,15 +151,15 @@
             var leftWall = new Wall();
             leftWall.setId("leftWall");
             leftWall.setPosition(0,0);
-            leftWall.setWidthHeight(1,600);
+            leftWall.setWidthHeight(1,1200);
             leftWall.setCategoryBits(1);
             leftWall.setMaskBits(30);
             leftWall.initialize();
 
             var rightWall = new Wall();
             rightWall.setId("rightWall");
-            rightWall.setPosition(500,0);
-            rightWall.setWidthHeight(1,600);
+            rightWall.setPosition(750,0);
+            rightWall.setWidthHeight(1,1200);
             rightWall.setCategoryBits(1);
             rightWall.setMaskBits(30);
             rightWall.initialize();
@@ -161,15 +167,15 @@
             var topWall = new Wall();
             topWall.setId("topWall");
             topWall.setPosition(0,-20);
-            topWall.setWidthHeight(1000,1);
+            topWall.setWidthHeight(2000,1);
             topWall.setCategoryBits(1);
             topWall.setMaskBits(30);
             topWall.initialize();
 
             var bottomWall = new Wall();
             bottomWall.setId("bottomWall");
-            bottomWall.setPosition(0,320);
-            bottomWall.setWidthHeight(1000,1);
+            bottomWall.setPosition(0,470);
+            bottomWall.setWidthHeight(2000,1);
             bottomWall.setCategoryBits(1);
             bottomWall.setMaskBits(30);
             bottomWall.initialize();
@@ -213,12 +219,37 @@
 
         }
 
-		-->
-		</script>
-	</head>
-	<body onload="setup()">
-		<canvas id="my_canvas" width="500" height="300" style="border:1px solid #FF0000;"> </canvas>
+        function htmlInit()
+        {
+            debugView = false;
+            document.getElementById("my_canvas").style.display = 'block';
+            document.getElementById("physics_canvas").style.display = 'none';
+        }
 
-        <canvas id="physics_canvas" width="500" height="300" style="border:1px solid #FF0000;"> </canvas>
-	</body>
+        function toggleView()
+        {
+            debugView = !debugView;
+
+            if(debugView == true)
+            {
+                document.getElementById("my_canvas").style.display = 'none';
+                document.getElementById("physics_canvas").style.display = 'block';
+            }
+            else
+            {
+                document.getElementById("my_canvas").style.display = 'block';
+                document.getElementById("physics_canvas").style.display = 'none';
+            }
+        }
+        -->
+        </script>
+    </head>
+    <body onload="htmlInit(); setup();">
+        <canvas id="my_canvas" width="750" height="450" style="border:1px solid #FF0000;"> </canvas>
+
+        <canvas id="physics_canvas" width="750" height="450" style="border:1px solid #FF0000;"> </canvas>
+
+        <br/>
+        <input type="Button" value="Toggle View" onclick="toggleView();" />
+    </body>
 </html>
