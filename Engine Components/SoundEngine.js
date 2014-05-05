@@ -1,12 +1,15 @@
-soundrepository = new function SoundReposito0ry(){
+soundrepository = new function SoundRepository(){
 
 	this.sounds = new Object();
 	
 	this.pair = new Object();
 	
 	this.pair["bgmusic"] = "sounds/music.ogg";
-	this.pair["laser"] = "sounds/acdc.ogg";
-	//this.pair["explosion"] = "sounds/explosion.wav";
+	this.pair["acdc"] = "sound/acdc.ogg";
+	this.pair["laser"] = "sounds/laser.mp3";
+	this.pair["shot"] = "sounds/shot.ogg";
+	this.pair["deusex"] = "sounds/deusex.mp3";
+	this.pair["explosion"] = "sounds/explosion.mp3";
 	
 	console.log(Object.keys(this.pair).length);
 
@@ -15,12 +18,10 @@ soundrepository = new function SoundReposito0ry(){
 
 	function soundLoadCallback()
 	{
-		console.log("soundcallback");
 		++soundsLoaded;
 
 		if(soundsLoaded === numberOfSounds)
 		{
-			console.log("music.ogg");
 			init();
 		}
 	}
@@ -75,11 +76,18 @@ AudioPlayback.prototype.stopPlayback = function()
 	this.sound.pause();
 	this.sound.currentTime = 0;
 }
+AudioPlayback.prototype.fadePlayback = function()
+{
+	while(this.sound.volume > 0){
+		this.sound.volume -= 0.05;		
+	}
+		this.sound.pause();
+		this.sound.currentTime = 0;
+		this.isPlaying = false;
+}
 
 AudioPlayback.prototype.setLooping = function()
 {
-	//this.isLooping = true;
-	//this.sound.loop = true;
 	if(this.isLooping === true)
 		this.isLooping = false;
 	else
@@ -92,29 +100,28 @@ AudioPlayback.prototype.setLooping = function()
 	console.log("loop set :"+this.isLooping);
 }
 
-soundpool = new function SoundPool(){
+function SoundPool(soundName){
 
-	var MAXSIZE = 30;
-	this.context = null;
+	this.sound = soundrepository.getSound(soundName);
+	console.log("soundPool");
+	this.MAXSIZE = 25;
 	this.pool = new Array();
-	
-	this.init = function(object) {
-		if (object == "laser") {
-			for (var i = 0; i < size; i++) {
-				laser = new Audio(pair["laser"]);
-				laser.volume = .12;
-				laser.load();
-				pool[i] = laser;
-			}
-		}
-		else if (object == "explosion") {
-			for (var i = 0; i < size; i++) {
-				var explosion = new Audio("sounds/explosion.wav");
-				explosion.volume = .1;
-				explosion.load();
-				pool[i] = explosion;
-			}
-		}
-	}
-
+	this.current = 0;
 }
+
+SoundPool.prototype.createPool = function(){
+	
+	for(var i = 0; i < this.MAXSIZE; i++){
+		this.pool[i] = this.sound;
+	}
+}
+
+SoundPool.prototype.getSound = function() {
+
+		this.pool[this.current].pause();
+		this.pool[this.current].currentTime = 0;
+		this.pool[this.current].play();			
+	
+	this.current = (this.current + 1) % this.MAXSIZE;
+}
+
