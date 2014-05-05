@@ -18,13 +18,9 @@
 		function init()
 		{
 			console.log("init() sound ");			
-			 sounds = ["bgmusic", "laser", "explosion", "deusex"];
-			 apb = new AudioPlayback("deusex");	
-			 fade = new AudioPlayback("explosion");
-			//apb.isLooping = true;
-			//apb.startPlayback();
-			//apb.setLooping();
-			//apb.startPlayback();
+			sounds = ["bgmusic", "laser", "explosion", "deusex"];
+			apb = new AudioPlayback("deusex");	
+			fade = new AudioPlayback("explosion");			
 			audioPool = new SoundPool("laser");
 			audioPool.createPool();
 		}
@@ -52,7 +48,7 @@
 		}
 		
 		function crossFade(){
-			fade.volume = .30;
+			//fade.volume = .30;
 			fade.startPlayback();
 			fade.fadePlayback();
 		}
@@ -62,7 +58,6 @@
 	</head>
 	<body>
 		<canvas id="background" width="200" height="200" style="border:1px solid #FF0000;">	
-		<p id="main">Harsha Ashok</p>
 		</canvas>
 			
 		<div width="200" height="400" style="border:1px solid #FF0000;">SOUND TEST BACKGROUND MUSIC
@@ -73,7 +68,7 @@
 		</div>
 		<div><p></p></div>
 		<div id="display" width="200" height="400" style="border:1px solid #FF0000;">		
-		SOUND POOL ONBUTTON TEST
+		SOUND POOL TEST
 		<div><button id="shoot" onclick="playPool();" >Play</button></div>
 		</div>
 		<div><p></p></div>

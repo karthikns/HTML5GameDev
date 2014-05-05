@@ -17,12 +17,10 @@ soundrepository = new function SoundRepository(){
 
 	function soundLoadCallback()
 	{
-		console.log("soundcallback");
 		++soundsLoaded;
 
 		if(soundsLoaded === numberOfSounds)
 		{
-			console.log("music.ogg");
 			init();
 		}
 	}
@@ -80,8 +78,7 @@ AudioPlayback.prototype.stopPlayback = function()
 AudioPlayback.prototype.fadePlayback = function()
 {
 	while(this.sound.volume > 0){
-		this.sound.volume -= 0.05;
-		
+		this.sound.volume -= 0.05;		
 	}
 		this.sound.pause();
 		this.sound.currentTime = 0;
@@ -90,8 +87,6 @@ AudioPlayback.prototype.fadePlayback = function()
 
 AudioPlayback.prototype.setLooping = function()
 {
-	//this.isLooping = true;
-	//this.sound.loop = true;
 	if(this.isLooping === true)
 		this.isLooping = false;
 	else
