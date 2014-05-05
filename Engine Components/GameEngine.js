@@ -31,12 +31,15 @@ function GameObject(x, y, width, height)
 	this._y = y;
     this._width = width;
     this._height = height;
+
+    this.properties = new Object();
 }
 
 GameObject.prototype._x = 0;
 GameObject.prototype._y = 0;
 GameObject.prototype._width = 0;
 GameObject.prototype._height = 0;
+GameObject.prototype.properties = null;
 
 GameObject.prototype.setPosition = function(x,y)
 {
@@ -52,18 +55,31 @@ GameObject.prototype.setWidthHeight = function(w,h)
 
 GameObject.prototype.physicsUpdate = function(gameObject, physicsObject)
 {
-    if(gameObject === undefined) {
+    if(gameObject === undefined)
+    {
         return;
     }
 
     //update game object x & y
     gameObject._x = physicsObject.m_xf.position.x * scale;
     gameObject._y = physicsObject.m_xf.position.y * scale;
-    if(gameObject.imageRenderer !== undefined) {
+
+    if(gameObject.imageRenderer !== undefined)
+    {
         gameObject.imageRenderer.x = physicsObject.m_xf.position.x * scale;
         gameObject.imageRenderer.y = physicsObject.m_xf.position.y * scale;
     }
 
+}
+
+GameObject.prototype.setKeyValue = function(key, value)
+{
+    this.properties[key] = value;
+}
+
+GameObject.prototype.getKeyValue = function(key)
+{
+    return this.properties.key;
 }
 
 function RenderPhysicsObject()

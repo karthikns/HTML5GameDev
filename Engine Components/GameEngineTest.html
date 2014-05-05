@@ -32,6 +32,8 @@
 
         EnemyPool.prototype.initialize = function(numRow, numCol)
         {
+			var percentFire = 0.005;
+
         	this.pool = new Array();
 
         	for(var row = 0; row < numRow; ++row)
@@ -58,9 +60,20 @@
 
 		            enemyShip.initialize();
 
+		            var intervalID = setInterval(enemyFire, 1000/60, enemyShip, percentFire);
+		            enemyShip.setKeyValue("intervalID", intervalID);
+
 		            this.pool[this.pool.length] = enemyShip;
 	        	}
         	}
+        }
+
+        function enemyFire(obj, percentFire)
+        {
+			if (Math.random() < percentFire)
+			{
+				obj.fire();
+			}
         }
 
 		function init()
