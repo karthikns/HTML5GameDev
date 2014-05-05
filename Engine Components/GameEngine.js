@@ -273,7 +273,7 @@ function Bullet()
 {
 }
 
-Bullet.prototype = new GameObject();
+Bullet.prototype = new RenderPhysicsObject();
 
 Bullet.prototype._imageId = null;
 Bullet.prototype._velocityX = 0;
@@ -326,6 +326,13 @@ Gun.prototype._bulletHeight = null;
 Gun.prototype._bulletVelocityX = 0;
 Gun.prototype._bulletVelocityY = 5;
 
+Gun.prototype._bulletType = null;
+
+Gun.prototype.setBulletType = function(bulletType)
+{
+    this._bulletType = bulletType;
+}
+
 Gun.prototype.setBulletImage = function(imageId)
 {
     this._bulletImageId = imageId;
@@ -352,6 +359,14 @@ Gun.prototype.fire = function(holderX, holderY)
 
     bullet.setImage(this._bulletImageId);
     bullet.setMoveVelocity(this._bulletVelocityX, this._bulletVelocityY);
+
+    if(this._bulletType == "player") {
+        bullet.setCategoryBits(8);
+        bullet.setMaskBits(5);
+    } else if(this._bulletType == "enemy") {
+        bullet.setCategoryBits(16);
+        bullet.setMaskBits(3);
+    }
 
     bullet.initialize();
 
