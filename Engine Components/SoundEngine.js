@@ -7,7 +7,8 @@ soundrepository = new function SoundRepository(){
 	this.pair["bgmusic"] = "sounds/music.ogg";
 	this.pair["laser"] = "sounds/laser.mp3";
 	this.pair["shot"] = "sounds/shot.ogg";
-	//this.pair["explosion"] = "sounds/explosion.wav";
+	this.pair["deusex"] = "sounds/deusex.mp3";
+	this.pair["explosion"] = "sounds/explosion.mp3";
 	
 	console.log(Object.keys(this.pair).length);
 
@@ -92,34 +93,6 @@ AudioPlayback.prototype.setLooping = function()
 		this.sound.loop = false;
 	console.log("loop set :"+this.isLooping);
 }
-/*
-function SoundPool(){
-
-	var MAXSIZE = 30;
-	this.context = null;
-	this.pool = new Array();
-	
-	this.init = function(object) {
-		console.log("SoundPool init");
-		if (object == "shot") {
-			for (var i = 0; i < MAXSIZE; i++) {
-				laser = new Audio(pair["shot"]);
-				laser.volume = .12;
-				laser.load();
-				pool[i] = laser;
-			}
-		}
-		else if (object == "explosion") {
-			for (var i = 0; i < MAXSIZE; i++) {
-				var explosion = new Audio("sounds/explosion.wav");
-				explosion.volume = .15;
-				explosion.load();
-				pool[i] = explosion;
-			}
-		}
-	}
-}
-*/
 
 function SoundPool(soundName){
 
