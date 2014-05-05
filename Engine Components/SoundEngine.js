@@ -77,6 +77,16 @@ AudioPlayback.prototype.stopPlayback = function()
 	this.sound.pause();
 	this.sound.currentTime = 0;
 }
+AudioPlayback.prototype.fadePlayback = function()
+{
+	while(this.sound.volume > 0){
+		this.sound.volume -= 0.05;
+		
+	}
+		this.sound.pause();
+		this.sound.currentTime = 0;
+		this.isPlaying = false;
+}
 
 AudioPlayback.prototype.setLooping = function()
 {

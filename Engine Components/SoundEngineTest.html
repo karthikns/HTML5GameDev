@@ -20,6 +20,7 @@
 			console.log("init() sound ");			
 			 sounds = ["bgmusic", "laser", "explosion", "deusex"];
 			 apb = new AudioPlayback("deusex");	
+			 fade = new AudioPlayback("explosion");
 			//apb.isLooping = true;
 			//apb.startPlayback();
 			//apb.setLooping();
@@ -45,7 +46,15 @@
 		}
 		
 		function toggleLoop(element){
+			if(element.checked)
+				element.checked = !element.checked;
 			apb.setLooping()		
+		}
+		
+		function crossFade(){
+			fade.volume = .30;
+			fade.startPlayback();
+			fade.fadePlayback();
 		}
 		-->
 		</script>
@@ -60,12 +69,17 @@
 		<div><button id="clickStart" onclick="playAudio();" >Play</button>
 		<button id="clickPause" onclick="pauseAudio();" >Pause</button>
 		<button id="clickStop" onclick="stopAudio();" >Stop</button></div>
-		<div><input type="checkbox" id="checkLoop" checked="false" onchange="toggleLoop(this);" >LoopAudio</button></div>
+		<div><input type="checkbox" id="checkLoop" checked="false;" onchange="toggleLoop(this);" >LoopAudio</button></div>
 		</div>
 		<div><p></p></div>
 		<div id="display" width="200" height="400" style="border:1px solid #FF0000;">		
 		SOUND POOL ONBUTTON TEST
 		<div><button id="shoot" onclick="playPool();" >Play</button></div>
+		</div>
+		<div><p></p></div>
+		<div id="display" width="200" height="400" style="border:1px solid #FF0000;">		
+		SOUND CROSSFADE TEST
+		<div><button id="shoot" onclick="crossFade();" >FadeOut</button></div>
 		</div>
 	</body>
 </html>
