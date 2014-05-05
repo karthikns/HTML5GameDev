@@ -82,6 +82,10 @@ GameObject.prototype.getKeyValue = function(key)
     return this.properties.key;
 }
 
+GameObject.prototype.removeObject = function()
+{
+}
+
 function RenderPhysicsObject()
 {
 
@@ -105,7 +109,6 @@ RenderPhysicsObject.prototype.setMaskBits = function(maskBits)
 
 function Wall()
 {
-
 }
 
 Wall.prototype = new RenderPhysicsObject();
@@ -152,6 +155,12 @@ Ship.prototype.initialize = function()
     user_data.border_color = '#555';
     //------------------------------
     this.physicsBody = gPhysicsEngine.addBody("ship", "dynamic", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate, this.categoryBits, this.maskBits);
+}
+
+Ship.prototype.removeObject = function()
+{
+    renderPool.removeObject(this.imageRenderer);
+    gPhysicsEngine.removeBody(this.physicsBody);
 }
 
 Ship.prototype.setMoveVelocity = function(velocity)
@@ -296,6 +305,12 @@ Bullet.prototype.initialize = function()
     this.physicsBody = gPhysicsEngine.addBody("bullet", "dynamic", this._x/scale, this._y/scale, this._width/scale, this._height/scale, user_data, this, this.physicsUpdate, this.categoryBits, this.maskBits);
 
     gPhysicsEngine.setMoveVelocity(this.physicsBody, {x: this._velocityX, y: this._velocityY} );
+}
+
+Bullet.prototype.removeObject = function()
+{
+    renderPool.removeObject(this.imageRenderer);
+    gPhysicsEngine.removeBody(this.physicsBody);
 }
 
 function Gun()

@@ -89,8 +89,6 @@ renderPool = new function RenderPool()
 		}
 
 		this.pool.splice(insertIndex, 0, obj);
-
-		// this.pool[this.pool.length] = obj;
 	}
 
 	this.removeObject = function(obj)
