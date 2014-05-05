@@ -5,6 +5,7 @@ soundrepository = new function SoundRepository(){
 	this.pair = new Object();
 	
 	this.pair["bgmusic"] = "sounds/music.ogg";
+	this.pair["acdc"] = "sound/acdc.ogg";
 	this.pair["laser"] = "sounds/laser.mp3";
 	this.pair["shot"] = "sounds/shot.ogg";
 	this.pair["deusex"] = "sounds/deusex.mp3";
