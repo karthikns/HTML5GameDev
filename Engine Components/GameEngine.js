@@ -32,16 +32,14 @@ function GameObject(x, y, width, height)
 	this._y = y;
     this._width = width;
     this._height = height;
-
-    this.properties = new Object();
 }
 
-GameObject._id = null;
+GameObject.prototype._id = null;
 GameObject.prototype._x = 0;
 GameObject.prototype._y = 0;
 GameObject.prototype._width = 0;
 GameObject.prototype._height = 0;
-GameObject.prototype.properties = null;
+GameObject.prototype._properties = null;
 
 GameObject.prototype.setId = function (id)
 {
@@ -86,12 +84,17 @@ GameObject.prototype.physicsUpdate = function(gameObject, physicsObject)
 
 GameObject.prototype.setKeyValue = function(key, value)
 {
-    this.properties[key] = value;
+    if(this._properties == null)
+    {
+        this._properties = new Object();
+    }
+
+    this._properties[key] = value;
 }
 
 GameObject.prototype.getKeyValue = function(key)
 {
-    return this.properties[key];
+    return this._properties[key];
 }
 
 GameObject.prototype.removeObject = function()
