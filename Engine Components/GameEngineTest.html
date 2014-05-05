@@ -189,9 +189,13 @@
 
             //enemy ship and player bullet
             if(id1 == "enemyShip" && id2 == "playerBullet") {
+                var blah = gameObject1.getKeyValue("intervalID");
+                clearInterval(blah);
                 gameObject1.removeObject.call(gameObject1);
                 gameObject2.removeObject.call(gameObject2);
             } else if(id2 == "enemyShip" && id1 == "playerBullet") {
+                var blah = gameObject2.getKeyValue("intervalID")
+                clearInterval(blah);
                 gameObject1.removeObject.call(gameObject1);
                 gameObject2.removeObject.call(gameObject2);
             }

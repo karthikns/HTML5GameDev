@@ -91,7 +91,7 @@ GameObject.prototype.setKeyValue = function(key, value)
 
 GameObject.prototype.getKeyValue = function(key)
 {
-    return this.properties.key;
+    return this.properties[key];
 }
 
 GameObject.prototype.removeObject = function()
