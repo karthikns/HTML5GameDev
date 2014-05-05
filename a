@@ -1,0 +1,490 @@
+[33mcommit 641567e262e997ff6a4262d83c0ae4c34b73b158[m
+Author: harshashok <harsha.vardhana.ashok@gmail.com>
+Date:   Sun May 4 00:29:54 2014 -0700
+
+    changed test suite
+
+[33mcommit ab80a84fdec700732b3baba5e9de2354b8bf867e[m
+Merge: ac6a4b4 e084220
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sun May 4 00:19:26 2014 -0700
+
+    Merge remote-tracking branch 'origin/Bullet'
+
+[33mcommit ac6a4b4da997bf2e50c8a9bb158b84756d33663e[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sun May 4 00:10:47 2014 -0700
+
+    IE: Constant key down trigger creates
+
+[33mcommit 2a11eb290477d00b3f5df1cd9f81f86933476b9d[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat May 3 23:15:14 2014 -0700
+
+    IE: Making stop action dynamic
+
+[33mcommit a25d88f8c521c51c028efa1be4f6c87ed23a48eb[m
+Author: harshashok <harsha.vardhana.ashok@gmail.com>
+Date:   Sun May 4 00:11:34 2014 -0700
+
+    testfile
+
+[33mcommit e08422014408dfa1edcefc91cd252122b18e4829[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sun May 4 00:10:47 2014 -0700
+
+    IE: Constant key down trigger creates
+
+[33mcommit 5b3129429c24ad0312bc1093ca31d1fb562823dd[m
+Author: harshashok <harsha.vardhana.ashok@gmail.com>
+Date:   Sun May 4 00:09:29 2014 -0700
+
+    added sound test
+
+[33mcommit b9dc6eaa616fe3f9fe6b7e0e23547827d56f9883[m
+Author: harshashok <harsha.vardhana.ashok@gmail.com>
+Date:   Sun May 4 00:08:19 2014 -0700
+
+    added functionalities; changed test files
+
+[33mcommit a9ebbb7948651373f7b33f223627d9d0c032cc88[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sat May 3 23:27:53 2014 -0700
+
+    boundries added
+
+[33mcommit 570cdfb043ee3ba2514b1678672d3a303dde1cb4[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat May 3 23:15:14 2014 -0700
+
+    IE: Making stop action dynamic
+
+[33mcommit a3e1c3df9ac8c18757b6150f30ccbd170e6d035c[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sat May 3 22:40:46 2014 -0700
+
+    input & physics engines fixed for moving player ship
+
+[33mcommit bc52bb91a76b3a4cd98d4bf9ec74d29a40197fc5[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat May 3 20:57:52 2014 -0700
+
+    RE: Included z index support
+
+[33mcommit 0699c9c40e9893d6631c11e59a02b04490e0d558[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat May 3 00:08:04 2014 -0700
+
+    GE: Adding scrolling background to test file
+
+[33mcommit 046e37cff660810db6eb3706e9441ff9b4ff5b30[m
+Merge: 3676ca5 eb0a72e
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sat May 3 00:03:51 2014 -0700
+
+    Merge branch 'master' of https://github.com/karthikns/HTML5GameDev
+
+[33mcommit 3676ca590d4614d1502b5334d0d492aab80ef780[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sat May 3 00:03:15 2014 -0700
+
+    Player object added
+
+[33mcommit eb0a72e446cf2b1c341950665c88b348555e01a9[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat May 3 00:01:32 2014 -0700
+
+    RE: Fixing center bug in ImageRendererScroll
+
+[33mcommit 65fa72807b0c6ae5bc70442655a1f0975c5f4a8c[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Fri May 2 23:50:12 2014 -0700
+
+    A: Adding background asset
+
+[33mcommit af5bec99036503d1d1edfaddc92bb4a15725fc2f[m
+Merge: 20d6e45 5522eb7
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Fri May 2 23:42:52 2014 -0700
+
+    Merge branch 'master' of https://github.com/karthikns/HTML5GameDev
+
+[33mcommit 5522eb7592fd41c5acf0662b27a0d94c313ed230[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Fri May 2 23:38:18 2014 -0700
+
+    RE: All (x,y) means center and minor arch changes
+
+[33mcommit e7f57dbdb6d376907aa8c8cd17b2b5d29e581530[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Fri May 2 23:32:16 2014 -0700
+
+    RE: Updating x, y to center position
+
+[33mcommit 20d6e457ed38a7e46044621ff4ac209dc815c8f5[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Fri May 2 23:13:14 2014 -0700
+
+    mapping of physics objects to render objects fixed/synchronized
+
+[33mcommit d7d0fee688b9344921ef5881d6829d4e5938a8e2[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Fri May 2 20:32:11 2014 -0700
+
+    correction in scale and orientation
+
+[33mcommit 54a63d064aefc0d6b3e42ef649652e3e1a213811[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Wed Apr 30 17:52:26 2014 -0700
+
+    GE: Creating pool for enemy ships
+
+[33mcommit b7a5321032c52ceaadfa19b2643f13db019ebf84[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Wed Apr 30 01:04:29 2014 -0700
+
+    GE: Initializing RE position correctly in GE
+
+[33mcommit fb7e72db1f3f59188867f0ec86ee7245657a23cc[m
+Merge: d016e38 d9db778
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Wed Apr 30 01:02:19 2014 -0700
+
+    Merge branch 'master' of https://github.com/karthikns/HTML5GameDev
+
+[33mcommit d016e3850676d933ca3d6a6ce02bb7dcb189d00a[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Wed Apr 30 01:01:52 2014 -0700
+
+    initialized physics loop
+
+[33mcommit d9db7782d158d45434488a36cdf3519cf1d7df88[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Wed Apr 30 00:44:38 2014 -0700
+
+    RE: ImageScroller working
+
+[33mcommit 1493c4bf826509f4c9cb6f846103a03df7b787cc[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Wed Apr 30 00:38:53 2014 -0700
+
+    corrected context and other errors in physics and game engine
+
+[33mcommit bf4b1b358d364fed3bd2586c56e5abf3a00bbe83[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Wed Apr 30 00:12:23 2014 -0700
+
+    Clean up
+
+[33mcommit 66e791ad47737e0fe0820cac0e6627ee3ebfa8c5[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Wed Apr 30 00:10:47 2014 -0700
+
+    minor changes to game engine to resolve errors
+
+[33mcommit 89ea213103073a1d2ef60f70dfb93df5d962349a[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 23:59:48 2014 -0700
+
+    GE: Setting canvas for test
+
+[33mcommit 23089f52268397109e30cdba603f5e2758ac5df7[m
+Merge: 35483e8 1707e6b
+Author: harshashok <harsha.vardhana.ashok@gmail.com>
+Date:   Tue Apr 29 21:51:38 2014 -0700
+
+    Merge branch 'master' of https://github.com/karthikns/HTML5GameDev
+
+[33mcommit 35483e82be7ce3b939110cdd813b11424efdf945[m
+Author: harshashok <harsha.vardhana.ashok@gmail.com>
+Date:   Tue Apr 29 21:51:25 2014 -0700
+
+    commit sound stuff 1
+
+[33mcommit c67c470e73cd73d5fc6f80e8ba90ec1fdb84b698[m
+Author: harshashok <harsha.vardhana.ashok@gmail.com>
+Date:   Tue Apr 29 21:49:47 2014 -0700
+
+    commit sound stuff
+
+[33mcommit a41bf1c00117aaf6c728a240ba9bf6f09b09071c[m
+Author: harshashok <harsha.vardhana.ashok@gmail.com>
+Date:   Tue Apr 29 21:46:42 2014 -0700
+
+    commit SoundEngine 1
+    
+    soundengine, test.html, sound assets
+
+[33mcommit 1707e6bddfa97065085b33c24f3856627e1bee1c[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 20:38:14 2014 -0700
+
+    GE: Updating test file for initial tests
+
+[33mcommit 348491327dea802584ece5d529e5e3bbe5d62d8c[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 20:37:52 2014 -0700
+
+    C: Adding enemy ship asset
+
+[33mcommit e0ffb9c42abb05073dd28e93cdd0cc96642a0bff[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Tue Apr 29 20:34:01 2014 -0700
+
+    changes to game engine contructor
+
+[33mcommit 2ca25288ab9b878824e0806506066363900c23f9[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 20:31:02 2014 -0700
+
+    GE: Checking in initial test file again
+
+[33mcommit e3981dd65ed9bf4199a24a2b8e591c52a4129f53[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 20:28:38 2014 -0700
+
+    A: Enemy ship asset
+
+[33mcommit 16107b3e1dad8e680e65d54aa28a66b8a5087445[m
+Merge: e0723a4 1eadc07
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Tue Apr 29 20:27:14 2014 -0700
+
+    changes
+
+[33mcommit 1eadc07a3bcc17e6d9d7e6903b105632d7fc2bdc[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 20:17:13 2014 -0700
+
+    GE: Checking in initial test file
+
+[33mcommit e0723a4d0dd3a43d26bda9da87f5cd968129a7f7[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Tue Apr 29 20:14:17 2014 -0700
+
+    add cancel velocity funciton
+
+[33mcommit 71aafe01ec663bbf7b2de7e3f7261162ab426ba0[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 20:07:08 2014 -0700
+
+    GE: Adding initializers
+
+[33mcommit 9721ebdc2d8ed7e05c83b0a2f604abe3f0397fda[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 19:34:49 2014 -0700
+
+    RE: Removing initializer name dependency
+
+[33mcommit 45fba75bbf1ea5075afc9f56c5d8f3a82a68dac8[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Tue Apr 29 19:17:49 2014 -0700
+
+    RenderEngine: Adding Image Scroller base
+    
+    Image scrolling functionality only in y direction and downwards
+
+[33mcommit a2746b3b72f7ecfcca69c42551293d3f01d7ede9[m
+Merge: e00d492 f2a5536
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Tue Apr 29 18:28:25 2014 -0700
+
+    Merge branch 'master' of https://github.com/karthikns/HTML5GameDev
+
+[33mcommit e00d492838caab3e0cff7b82bdf02c686267b0d2[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Tue Apr 29 18:28:06 2014 -0700
+
+    x y correction to GameObject
+
+[33mcommit f2a55360746b2040e4948db083a93514cec032a4[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Apr 12 05:50:43 2014 -0700
+
+    Render Engine: Engine is game independent
+    
+    Moving functionality of image information dynamic, i.e. this is
+    specified now by a configuration file
+
+[33mcommit 7361b2b8c13b983830c2de6c6bd9ea3ac2fd540f[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sat Apr 12 05:47:22 2014 -0700
+
+    Changes to game engine
+
+[33mcommit 452d4c630b59fa0a2c22b600ba759584f834d7e8[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sat Apr 12 04:44:54 2014 -0700
+
+    callbacks for key actions
+
+[33mcommit 936c03b32bbc14c29284387aecc16d2ae647ce67[m
+Merge: 82e6b6f cc967d2
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sat Apr 12 03:56:21 2014 -0700
+
+    Merge branch 'master' of https://github.com/karthikns/HTML5GameDev
+
+[33mcommit 82e6b6f3fac1f0b4f6175b4743d366e6a508671f[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sat Apr 12 03:55:37 2014 -0700
+
+    physics and game engine updated with body creation and setting velocity
+
+[33mcommit cc967d236159618b34424be046d514a364e99938[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Apr 12 03:50:02 2014 -0700
+
+    Configuration: Render Configuration
+    
+    Adding initial render file
+
+[33mcommit 5a5611e2774c536191f3baa0a5fbb38239f5e0c8[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Apr 12 02:56:00 2014 -0700
+
+    GameEngine: Adding width and height to Ship
+
+[33mcommit fae0c675acd457a37dcab6dda90c27ef8c68558f[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Apr 12 02:28:00 2014 -0700
+
+    GameEngine: Base skeleton
+    
+    Base skeleton of GameObject, Ship, PlayerShip and Bullet created
+
+[33mcommit e1df74ac2b3fa0eb227043594930f5558e8c65c9[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Apr 12 01:49:47 2014 -0700
+
+    RenderEngine: ImageRendererScroll
+    
+    Checking in functionality of ImageRendererScroll. Implementation not
+    working
+
+[33mcommit a8b2c8d3e8503644684a12a47d49ed9f9c3055db[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Fri Apr 11 21:33:56 2014 -0700
+
+    x and y coordinates update from physics to game
+
+[33mcommit 38ae79e4a7125b9a862bdf0ea78bb33697d781f5[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Mon Apr 7 18:30:42 2014 -0700
+
+    ignored files
+
+[33mcommit 67c85d402c7e6ef13d755bf463c5682745b21603[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Mon Apr 7 17:09:46 2014 -0700
+
+    physics engine collision test fix
+
+[33mcommit 962e3957033fa08d58e1944f8429b03f975cc424[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Mon Apr 7 16:54:17 2014 -0700
+
+    bug fix for physics engine test
+
+[33mcommit 856a65ede213592f07c84edc057a13f26b3d2f69[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Mon Apr 7 11:32:02 2014 -0700
+
+    GameObjectTest: Adding dummy game object for test
+    
+    Adding skeleton for testing the physics engine hookup functionality.
+
+[33mcommit 73e55d78b67e805b529efd7e28c0ef8b49ee048c[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sun Mar 23 20:23:17 2014 -0700
+
+    InputEngine
+    
+    Adding instructions to the test file
+
+[33mcommit 11c027757a2622d2c302a22d577614433cde8d74[m
+Merge: 3d71fb3 fb877df
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sun Mar 23 00:49:30 2014 -0700
+
+    Merge branch 'master' of https://github.com/karthikns/HTML5GameDev
+
+[33mcommit 3d71fb31c2b5e190fabe8f94dbcea30c4e2e3160[m
+Author: HyperDunk <aakarsh.mhm@gmail.com>
+Date:   Sun Mar 23 00:48:53 2014 -0700
+
+    physics engine initial commit
+
+[33mcommit fb877df13d6876fdd1f7d7dc926722d8facb8535[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Mar 22 18:32:58 2014 -0700
+
+    RenderEngine: Adding fireball demo
+
+[33mcommit 67fd3043e34e6517f1882e0f3230467872b2061a[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Mar 22 18:32:10 2014 -0700
+
+    Assets: Adding LF2 Deep fireball cropped asset
+
+[33mcommit b7f298567874a278dc37669ab8cf70964d08caa5[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Mar 22 15:44:14 2014 -0700
+
+    RenderEngine: Adding AnimManager Skeleton
+
+[33mcommit 7bebedf8399956b0baa3f81bd45e5b812b889f1b[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Mar 22 15:29:32 2014 -0700
+
+    RenderEngine: Cleaned architecture of AnimRederer
+    
+    Cleaned architecture of AnimRederer
+    Test file displays usage of frame rate param for AnimRenderer
+
+[33mcommit 6dde0f169eb434aa0f70f85d019ebf4c3830f039[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Mar 22 15:14:01 2014 -0700
+
+    RenderTest: AnimRenderer working
+
+[33mcommit 4360a80d8ec5d176210fce7df8b99d8a1bcf9b4e[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Mar 22 15:13:26 2014 -0700
+
+    Assets: Adding stock bullets
+
+[33mcommit b0414b38f7b6769e2be01ffbb3daeeefc8713f72[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Mar 22 12:41:37 2014 -0700
+
+    RenderEngine: updating imageRepository, renderPool
+    
+    imageRepository simplified to specify in game image names and sources
+    renderPool.removeObject() is working
+
+[33mcommit d0a9f105b64803792f97f85b161db4830e9e2cf7[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Sat Mar 22 11:52:00 2014 -0700
+
+    RenderEngine: ImageRenderer working
+    
+    Basic imageRepository, renderPool and ImageRenderer working
+
+[33mcommit 8182d0b4301f6840bdfb1e91304a1fa7f1138bcf[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Fri Mar 21 20:15:29 2014 -0700
+
+    Input Engine
+    
+    Full functionality of InputEngine
+    Adding Test html
+
+[33mcommit 8591b1a79944a095e75fcc57321dd30775915f75[m
+Author: Karthik NS <karthik.nallapeta@gmail.com>
+Date:   Fri Mar 21 18:29:15 2014 -0700
+
+    Base Files
+    
+    Adding Galaxian game prototype without collision detection
+    Adding Rendering engine and Input engine initial files
