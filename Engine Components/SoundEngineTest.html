@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Sound Test </title>
+		<style>
+		#background
+			{
+				z-index: -2;
+			}
+		#main
+			{
+				z-index: -1;
+			}
+		</style>
+		<script src="SoundEngine.js"> </script>
+		<script>
+		<!--
+		function init()
+		{
+			console.log("init() sound ");			
+			 sounds = ["bgmusic", "laser", "explosion"];
+			 apb = new AudioPlayback("bgmusic");	
+			//apb.isLooping = true;
+			//apb.startPlayback();
+			//apb.setLooping();
+			//apb.startPlayback();
+			audioPool = new SoundPool("laser");
+			audioPool.createPool();
+		}
+		
+		function playPool(){
+			audioPool.getSound();
+		}
+		
+		function playAudio(){
+			apb.startPlayback();
+		}
+		
+		function pauseAudio(){
+			apb.pausePlayback();
+		}
+		
+		function stopAudio(){
+			apb.stopPlayback();
+		}
+		
+		function toggleLoop(element){
+			apb.setLooping()		
+		}
+		-->
+		</script>
+
+	</head>
+	<body>
+		<canvas id="background" width="200" height="200" style="border:1px solid #FF0000;">	
+		<p id="main">Harsha Ashok</p>
+		</canvas>
+			
+		<div width="200" height="400" style="border:1px solid #FF0000;">SOUND TEST BACKGROUND MUSIC
+		<div><button id="clickStart" onclick="playAudio();" >Play</button>
+		<button id="clickPause" onclick="pauseAudio();" >Pause</button>
+		<button id="clickStop" onclick="stopAudio();" >Stop</button></div>
+		<div><input type="checkbox" id="checkLoop" checked="false" onchange="toggleLoop(this);" >LoopAudio</button></div>
+		</div>
+		<div><p></p></div>
+		<div id="display" width="200" height="400" style="border:1px solid #FF0000;">		
+		SOUND POOL ONBUTTON TEST
+		<div><button id="shoot" onclick="playPool();" >Play</button></div>
+		</div>
+	</body>
+</html>
