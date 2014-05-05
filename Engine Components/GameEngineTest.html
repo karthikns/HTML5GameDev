@@ -182,9 +182,13 @@
 
             //player ship and enemy bullet
             if(id1 == "playerShip" && id2 == "enemyBullet") {
+                gameObject1.removeObject.call(gameObject1);
                 gameObject2.removeObject.call(gameObject2);
+                window.location.reload();
             } else if(id2 == "playerShip" && id1 == "enemyBullet") {
                 gameObject1.removeObject.call(gameObject1);
+                gameObject2.removeObject.call(gameObject2);
+                window.location.reload();
             }
 
             //enemy ship and player bullet
@@ -206,6 +210,7 @@
             } else if( (id2 == "leftWall" || id2 == "rightWall" || id2 == "topWall" || id2 == "bottomWall") && (id1 == "playerBullet" || id1 == "enemyBullet") ) {
                 gameObject1.removeObject.call(gameObject1);
             }
+
         }
 
 		-->
