@@ -106,16 +106,17 @@ Wall.prototype.initialize = function()
 
 function Ship()
 {
-
+    this._guns = new Array();
+    this._bullets = new Array();
 }
 
 Ship.prototype = new RenderPhysicsObject();
-Ship.prototype._bullets = new Array();
+Ship.prototype._bullets = null;
 Ship.prototype._width = 0;
 Ship.prototype._height = 0;
 Ship.prototype._imageId = null;
 Ship.prototype._velocity = 5;
-Ship.prototype._guns = new Array();
+Ship.prototype._guns = null;
 
 Ship.prototype.setImage = function(imageId)
 {

@@ -48,9 +48,17 @@
                     enemyShip.setCategoryBits(4);
                     enemyShip.setMaskBits(15);
 
-		            this.pool[this.pool.length] = enemyShip;
+		            var gun = new Gun();
+		            gun.setPosition(0, 5);
+		            gun.setBulletImage("b2");
+		            gun.setBulletWidthHeight(2, 14);
+		            gun.setBulletVelocity(0, 10);
+
+		            enemyShip.addGun(gun);
 
 		            enemyShip.initialize();
+
+		            this.pool[this.pool.length] = enemyShip;
 	        	}
         	}
         }
@@ -106,7 +114,6 @@
             gun.setBulletVelocity(0, -10);
 
             playerShip.addGun(gun);
-
 
             playerShip.initialize();
 
