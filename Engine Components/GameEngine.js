@@ -2,10 +2,11 @@ function GameEngine()
 {
 }
 
-GameEngine.prototype.initialize = function(masterAssetFile, callback)
+GameEngine.prototype.initialize = function(masterAssetFile, callback, collisionHandler)
 {
     gInputEngine.setup();
     gPhysicsEngine.init();
+    gPhysicsEngine.setCollisionHandler(collisionHandler);
     imageRepository.initialize(masterAssetFile, callback);
 }
 
@@ -26,7 +27,7 @@ GameEngine.prototype.beginGame = function()
 gGameEngine = new GameEngine();
 
 function GameObject(x, y, width, height)
-{	
+{
 	this._x = x;
 	this._y = y;
     this._width = width;
@@ -35,11 +36,22 @@ function GameObject(x, y, width, height)
     this.properties = new Object();
 }
 
+GameObject._id = null;
 GameObject.prototype._x = 0;
 GameObject.prototype._y = 0;
 GameObject.prototype._width = 0;
 GameObject.prototype._height = 0;
 GameObject.prototype.properties = null;
+
+GameObject.prototype.setId = function (id)
+{
+    this._id = id;
+}
+
+GameObject.prototype.getId = function ()
+{
+    return this._id;
+}
 
 GameObject.prototype.setPosition = function(x,y)
 {
@@ -160,7 +172,7 @@ Ship.prototype.initialize = function()
 Ship.prototype.removeObject = function()
 {
     renderPool.removeObject(this.imageRenderer);
-    gPhysicsEngine.removeBody(this.physicsBody);
+    gPhysicsEngine.removeObjectsQueue.push(this.physicsBody);
 }
 
 Ship.prototype.setMoveVelocity = function(velocity)
@@ -310,7 +322,8 @@ Bullet.prototype.initialize = function()
 Bullet.prototype.removeObject = function()
 {
     renderPool.removeObject(this.imageRenderer);
-    gPhysicsEngine.removeBody(this.physicsBody);
+    //gPhysicsEngine.removeBody(this.physicsBody);
+    gPhysicsEngine.removeObjectsQueue.push(this.physicsBody);
 }
 
 function Gun()
@@ -361,9 +374,11 @@ Gun.prototype.fire = function(holderX, holderY)
     bullet.setMoveVelocity(this._bulletVelocityX, this._bulletVelocityY);
 
     if(this._bulletType == "player") {
+        bullet.setId("playerBullet");
         bullet.setCategoryBits(8);
         bullet.setMaskBits(5);
     } else if(this._bulletType == "enemy") {
+        bullet.setId("enemyBullet");
         bullet.setCategoryBits(16);
         bullet.setMaskBits(3);
     }

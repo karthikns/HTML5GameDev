@@ -19,6 +19,9 @@ PhysicsEngine.prototype.world = null;
 PhysicsEngine.prototype.ctx = null;
 PhysicsEngine.prototype.PHYSICS_LOOP_HZ = 1.0/60;
 
+PhysicsEngine.prototype.collisionCallbackHandler = null;
+PhysicsEngine.prototype.removeObjectsQueue = [];
+
 PhysicsEngine.prototype.init = function () {
 	
 	b2Vec2 = Box2D.Common.Math.b2Vec2;
@@ -65,8 +68,19 @@ PhysicsEngine.prototype.draw_world = function() {
     this.ctx.restore();
 }
 
+PhysicsEngine.prototype.removeBodiesInQueue = function() {
+
+    if(gPhysicsEngine.removeObjectsQueue != null && gPhysicsEngine.removeObjectsQueue.length > 0 ) {
+        for(var i=0; i<gPhysicsEngine.removeObjectsQueue.length; i++) {
+            gPhysicsEngine.removeBody(gPhysicsEngine.removeObjectsQueue[i]);
+        }
+        gPhysicsEngine.removeObjectsQueue.length = 0;
+    }
+}
+
 PhysicsEngine.prototype.update = function () {
-	//var start = Date.now();        
+	//var start = Date.now();
+    gPhysicsEngine.removeBodiesInQueue();
 	gPhysicsEngine.world.Step(gPhysicsEngine.PHYSICS_LOOP_HZ, 8, 3);
 	gPhysicsEngine.world.ClearForces();
 	gPhysicsEngine.draw_world();
@@ -123,6 +137,19 @@ PhysicsEngine.prototype.setMoveVelocity = function (pBody, velocity) {
     pBody.SetAwake(true);
     pBody.SetLinearVelocity(new b2Vec2(velocity.x,velocity.y));
     //pBody.ApplyImpulse( new b2Vec2(velocity.x,velocity.y),  pBody.GetWorldCenter() );
+}
+
+PhysicsEngine.prototype.setCollisionHandler = function(handler) {
+    this.collisionCallbackHandler = handler;
+    b2ContactListener.prototype.BeginContact = function (contact)
+    {
+        //now come action time
+        var a = contact.GetFixtureA().GetBody();
+        var b = contact.GetFixtureB().GetBody();
+
+        gPhysicsEngine.collisionCallbackHandler(a.userObject, b.userObject);
+
+    };
 }
 	
 var gPhysicsEngine = new PhysicsEngine();

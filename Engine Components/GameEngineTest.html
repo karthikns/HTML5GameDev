@@ -12,7 +12,7 @@
 		<!--
 		function setup()
 		{
-			gGameEngine.initialize("configuration/renderConfig.json", init);
+			gGameEngine.initialize("configuration/renderConfig.json", init, collisionHandler);
 
 			var canvasElement = document.getElementById("my_canvas");
 			gGameEngine.setCanvas(canvasElement);
@@ -44,6 +44,7 @@
 	        		var y = 30 + row * 50;
 
 					var enemyShip = new Ship();
+                    enemyShip.setId("enemyShip");
 					enemyShip.setPosition(x, y);
 					enemyShip.setWidthHeight(42, 32);
 					enemyShip.setImage("eship");
@@ -95,6 +96,7 @@
 
             var playerShip = new PlayerShip();
 
+            playerShip.setId("playerShip");
             playerShip.setPosition(250, 250);
             playerShip.setWidthHeight(64,52);
 
@@ -118,6 +120,7 @@
             gun.setBulletImage("b1");
             gun.setBulletWidthHeight(2, 14);
             gun.setBulletVelocity(0, -10);
+            gun.setBulletType("player");
 
             playerShip.addGun(gun);
 
@@ -140,6 +143,7 @@
         function createBoundary()
         {
             var leftWall = new Wall();
+            leftWall.setId("leftWall");
             leftWall.setPosition(0,0);
             leftWall.setWidthHeight(1,600);
             leftWall.setCategoryBits(1);
@@ -147,6 +151,7 @@
             leftWall.initialize();
 
             var rightWall = new Wall();
+            rightWall.setId("rightWall");
             rightWall.setPosition(500,0);
             rightWall.setWidthHeight(1,600);
             rightWall.setCategoryBits(1);
@@ -154,6 +159,7 @@
             rightWall.initialize();
 
             var topWall = new Wall();
+            topWall.setId("topWall");
             topWall.setPosition(0,-20);
             topWall.setWidthHeight(1000,1);
             topWall.setCategoryBits(1);
@@ -161,11 +167,41 @@
             topWall.initialize();
 
             var bottomWall = new Wall();
+            bottomWall.setId("bottomWall");
             bottomWall.setPosition(0,320);
             bottomWall.setWidthHeight(1000,1);
             bottomWall.setCategoryBits(1);
             bottomWall.setMaskBits(30);
             bottomWall.initialize();
+        }
+
+        function collisionHandler(gameObject1, gameObject2)
+        {
+            var id1 = gameObject1.getId();
+            var id2 = gameObject2.getId();
+
+            //player ship and enemy bullet
+            if(id1 == "playerShip" && id2 == "enemyBullet") {
+                gameObject2.removeObject.call(gameObject2);
+            } else if(id2 == "playerShip" && id1 == "enemyBullet") {
+                gameObject1.removeObject.call(gameObject1);
+            }
+
+            //enemy ship and player bullet
+            if(id1 == "enemyShip" && id2 == "playerBullet") {
+                gameObject1.removeObject.call(gameObject1);
+                gameObject2.removeObject.call(gameObject2);
+            } else if(id2 == "enemyShip" && id1 == "playerBullet") {
+                gameObject1.removeObject.call(gameObject1);
+                gameObject2.removeObject.call(gameObject2);
+            }
+
+            //bullets and wall
+            if( (id1 == "leftWall" || id1 == "rightWall" || id1 == "topWall" || id1 == "bottomWall") && (id2 == "playerBullet" || id2 == "enemyBullet") ) {
+                gameObject2.removeObject.call(gameObject2);
+            } else if( (id2 == "leftWall" || id2 == "rightWall" || id2 == "topWall" || id2 == "bottomWall") && (id1 == "playerBullet" || id1 == "enemyBullet") ) {
+                gameObject1.removeObject.call(gameObject1);
+            }
         }
 
 		-->
