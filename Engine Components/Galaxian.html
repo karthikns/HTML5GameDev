@@ -187,33 +187,46 @@
             var id2 = gameObject2.getId();
 
             //player ship and enemy bullet
-            if(id1 == "playerShip" && id2 == "enemyBullet") {
+            if(id1 == "playerShip" && id2 == "enemyBullet")
+            {
                 gameObject1.removeObject.call(gameObject1);
                 gameObject2.removeObject.call(gameObject2);
+
                 window.location.reload();
-            } else if(id2 == "playerShip" && id1 == "enemyBullet") {
+            }
+            else if(id2 == "playerShip" && id1 == "enemyBullet")
+            {
                 gameObject1.removeObject.call(gameObject1);
                 gameObject2.removeObject.call(gameObject2);
+
                 window.location.reload();
             }
 
             //enemy ship and player bullet
-            if(id1 == "enemyShip" && id2 == "playerBullet") {
-                var blah = gameObject1.getKeyValue("intervalID");
-                clearInterval(blah);
+            if(id1 == "enemyShip" && id2 == "playerBullet")
+            {
+                var intervalID = gameObject1.getKeyValue("intervalID");
+                clearInterval(intervalID);
+
                 gameObject1.removeObject.call(gameObject1);
                 gameObject2.removeObject.call(gameObject2);
-            } else if(id2 == "enemyShip" && id1 == "playerBullet") {
-                var blah = gameObject2.getKeyValue("intervalID")
-                clearInterval(blah);
+            }
+            else if(id2 == "enemyShip" && id1 == "playerBullet")
+            {
+                var intervalID = gameObject2.getKeyValue("intervalID")
+                clearInterval(intervalID);
+
                 gameObject1.removeObject.call(gameObject1);
                 gameObject2.removeObject.call(gameObject2);
             }
 
             //bullets and wall
-            if( (id1 == "leftWall" || id1 == "rightWall" || id1 == "topWall" || id1 == "bottomWall") && (id2 == "playerBullet" || id2 == "enemyBullet") ) {
+            if( (id1 == "leftWall" || id1 == "rightWall" || id1 == "topWall" || id1 == "bottomWall") && (id2 == "playerBullet" || id2 == "enemyBullet") )
+            {
                 gameObject2.removeObject.call(gameObject2);
-            } else if( (id2 == "leftWall" || id2 == "rightWall" || id2 == "topWall" || id2 == "bottomWall") && (id1 == "playerBullet" || id1 == "enemyBullet") ) {
+            }
+            else if( (id2 == "leftWall" || id2 == "rightWall" || id2 == "topWall" || id2 == "bottomWall") && (id1 == "playerBullet" || id1 == "enemyBullet") )
+            {
                 gameObject1.removeObject.call(gameObject1);
             }
 

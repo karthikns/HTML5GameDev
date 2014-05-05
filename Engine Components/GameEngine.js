@@ -376,11 +376,14 @@ Gun.prototype.fire = function(holderX, holderY)
     bullet.setImage(this._bulletImageId);
     bullet.setMoveVelocity(this._bulletVelocityX, this._bulletVelocityY);
 
-    if(this._bulletType == "player") {
+    if(this._bulletType == "player")
+    {
         bullet.setId("playerBullet");
         bullet.setCategoryBits(8);
         bullet.setMaskBits(5);
-    } else if(this._bulletType == "enemy") {
+    }
+    else if(this._bulletType == "enemy")
+    {
         bullet.setId("enemyBullet");
         bullet.setCategoryBits(16);
         bullet.setMaskBits(3);
